@@ -1,7 +1,12 @@
 ﻿var Location = {
     watchID: null,
-    ticks: 0,
     current: null,
+
+    watchers: [],
+
+    AddWatcher: function(watcher) {
+        Location.watchers.push(watcher);
+    },
 
     Watch: function () {
         if (Location.watchID != null) {
@@ -23,21 +28,9 @@
     },
 
     success: function (position) {
-        if (!Location.ticks) {
-            Location.ticks = 0;
-        }
-        console.log(Location.ticks);
-        Location.current = position;
-        var element = document.getElementById("location");
-        style = window.getComputedStyle(element);
-        if (element.style.backgroundColor != "cyan") {
-            element.style.backgroundColor = "cyan";
-        } else {
-            element.style.backgroundColor = "darkCyan";
-        }
-        element.innerHTML = 'Lat:' + position.coords.latitude.toString().substring(0, 5) + ' ' +
-                            'Long: ' + position.coords.longitude.toString().substring(0, 5) +
-                            ' [±' + position.coords.accuracy + ']';
+        Location.watchers.forEach(function (watcher, idx) {
+            watcher(position);
+        })
 
     },
 
@@ -52,3 +45,20 @@
         }
     }
 }
+
+Location.AddWatcher(function (position) {
+    Location.current = position;
+});
+
+Location.AddWatcher(function (position) {
+    var element = document.getElementById("location");
+    style = window.getComputedStyle(element);
+    if (element.style.backgroundColor != "cornflowerBlue") {
+        element.style.backgroundColor = "cornflowerBlue";
+    } else {
+        element.style.backgroundColor = "darkCyan";
+    }
+    element.innerHTML = position.coords.latitude.toString().substring(0, 6) + ':' +
+                        position.coords.longitude.toString().substring(0, 6) + '@' +
+                        '[±' + position.coords.accuracy + ']';
+});
