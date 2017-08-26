@@ -18,13 +18,26 @@
         var receivedElement = parentElement.querySelector('.received');
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
+        Location.Watch();
+        Storage.Load();
+
+        document.getElementById("location").addEventListener("click", Location.Record);
+        document.getElementById("location").addEventListener("touchstart", Location.Record);
+
+        document.getElementById("flushAll").addEventListener("click", Storage.Flush);
+        // document.getElementById("flushAll").addEventListener("touchstart", Storage.Flush);
+        document.getElementById("share").addEventListener("click", Storage.Share);
     };
 
     function onPause() {
+        Location.Stop();
+        Storage.Save();
         // TODO: This application has been suspended. Save application state here.
     };
 
     function onResume() {
+        Location.Watch();
+        Storage.Load();
         // TODO: This application has been reactivated. Restore application state here.
     };
 } )();

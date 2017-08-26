@@ -4,3 +4,6 @@
 [Pp]lugins/wp8.json
 [Pp]lugins/remote_ios.json
 /[Pp]latforms/
+/AppPackages/CordovaApp.Windows10_1.0.0.1_debug_Test
+/bin
+/bld/Windows-AnyCPU/Debug

@@ -32,22 +32,21 @@ body {
 }
 
 .app {
-    background: url(../images/cordova.png) no-repeat center top; 
     position: absolute;             
-    left: 50%;
-    top: 50%;
-    height: 50px;                  
-    width: 225px;                   
+    top: 10%;
+    left: 10%;
+    width: 80%;                   
     text-align: center;
-    padding: 180px 0px 0px 0px;     
-    margin: -115px 0px 0px -112px;
+    padding: 0px 0px 0px 0px;     
+    margin: 0px;
+    height: 100%;
 }
 
 @media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
     .app {
         background-position:left center;
         padding:75px 0px 75px 170px;
-        margin:-90px 0px 0px -198px;
+        margin:-90px 0px 0px 0px;
     }
 }
 
@@ -60,13 +59,17 @@ h1 {
     text-align:center;
 }
 
+.storedLocations {
+    width: 100%;
+}
+
 .event {
     border-radius:4px;
     -webkit-border-radius:4px;
     color:#FFFFFF;
     font-size:12px;
-    margin:0px 30px;
-    padding:2px 0px;
+    margin:0px 5px;
+    padding:5px 0px;
 }
 
 .event.listening {
@@ -77,6 +80,22 @@ h1 {
 .event.received {
     background-color:#4B946A;
     display:none;
+}
+
+.event.delete, .event.share {
+    padding: 10px;
+    display: block;
+    background-color:red;
+    margin: 5px 0px;
+}
+
+.event.share {
+    background-color: limegreen;
+}
+
+#tableContent {
+    height: 60%;
+    overflow: scroll;
 }
 
 @keyframes fade {
