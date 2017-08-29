@@ -1,16 +1,26 @@
-﻿var Pointer = function (currentLocation) {
+﻿var Pointer = function (currentLocation, scale = 1) {
     this.currentLocation = currentLocation;
     this.svg = this.initSVG();
+    this.scale = scale;
+    this.lastHeading = null;
+    this.lastStartPoint = null;
+    this.defaultWidth = 20;
 }
 
 Pointer.prototype = {
     PointTo: function (heading, directionFrom) {
+        this.lastHeading = heading;
+        this.lastStartPoint = directionFrom;
+
         var direction = Math.round(heading.trueHeading - directionFrom.DirectionTo(this.currentLocation)) % 360;
         var angleInRadians = -1 * ((direction + 90) % 360).toRad();
-        var radius = 10;
+        var radius = (this.defaultWidth / 2) * this.scale;
 
-        var x = 10 + Math.round(radius * Math.cos(angleInRadians));
-        var y = 10 + Math.round(radius * Math.sin(angleInRadians));
+        var x = radius + Math.round(radius * Math.cos(angleInRadians));
+        var y = radius + Math.round(radius * Math.sin(angleInRadians));
+
+        this.svg.setAttribute("width", this.scale * this.defaultWidth);
+        this.svg.setAttribute("height", this.scale * this.defaultWidth);
 
         var line = this.svg.querySelector("line");
         line.setAttribute("x2", x);
@@ -23,33 +33,42 @@ Pointer.prototype = {
 
     initSVG: function () {
         var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        /*
-        <svg width="20" height="20">
-            <circle cx="10" cy="10" r="3" stroke="black" stroke-width="1" fill="white" />
-            <line class="pointer" x1="10" y1="10" x2="10" y2="10" style="stroke:rgb(255,0,0);stroke-width:1" />
-        </svg>
-        */
 
-        svg.setAttribute("width", "20");
-        svg.setAttribute("height", "20");
+        var size = this.scale * this.defaultWidth;
+
+        svg.setAttribute("width", size);
+        svg.setAttribute("height", size);
 
         var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        circle.setAttribute("cx", "10");
-        circle.setAttribute("cy", "10");
-        circle.setAttribute("r", "3");
+        circle.setAttribute("cx", size/2);
+        circle.setAttribute("cy", size/2);
+        circle.setAttribute("r", size/3);
         circle.setAttribute("stroke", "black");
         circle.setAttribute("stroke-width", "1");
         circle.setAttribute("fill", "white");
         svg.appendChild(circle);
 
         var pointer = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        pointer.setAttribute("x1", "10");
-        pointer.setAttribute("y1", "10");
-        pointer.setAttribute("x2", "10");
-        pointer.setAttribute("y2", "10");
+        pointer.setAttribute("x1", size / 2);
+        pointer.setAttribute("y1", size / 2);
+        pointer.setAttribute("x2", size / 2);
+        pointer.setAttribute("y2", size / 2);
         pointer.setAttribute("style", "stroke:rgb(255,0,0);stroke-width:1");
         svg.appendChild(pointer);
 
         return svg;
+    },
+
+    Resize: function (width) {
+        this.rescale(width / this.defaultWidth);
+    },
+
+    Redraw: function () {
+        this.PointTo(this.lastHeading, this.lastStartPoint);
+    },
+
+    rescale: function (scale) {
+        this.scale = scale;
+        this.Redraw;
     }
 }
