@@ -55,5 +55,22 @@
         },
         "is_top_level": false,
         "variables": {}
+    },
+    "cordova-plugin-device": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-device"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-background-mode": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/YoSarin/cordova-plugin-background-mode",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

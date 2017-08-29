@@ -4,8 +4,16 @@
 
     watchers: [],
 
+    CurrentPoint: function () {
+        if (Location.current === null) {
+            return new Point(0, 0);
+        }
+        return new Point(Location.current.coords.longitude, Location.current.coords.latitude);
+    },
+
     AddWatcher: function(watcher) {
         Location.watchers.push(watcher);
+        return Location.watchers.length - 1;
     },
 
     Watch: function () {
@@ -30,8 +38,7 @@
     success: function (position) {
         Location.watchers.forEach(function (watcher, idx) {
             watcher(position);
-        })
-
+        });
     },
 
     error: function (err) {
@@ -43,6 +50,13 @@
             navigator.geolocation.clearWatch(Location.watchID);
             Location.watchID = null;
         }
+    },
+
+    RemoveWatchers: function (indexes) {
+        indexes.sort(function (a, b) { return b - a; });
+        indexes.forEach(function (val, index) {
+            Location.watchers.splice(val, 1);
+        });
     }
 }
 
@@ -60,5 +74,5 @@ Location.AddWatcher(function (position) {
     }
     element.innerHTML = position.coords.latitude.toString().substring(0, 6) + ':' +
                         position.coords.longitude.toString().substring(0, 6) + '@' +
-                        '[±' + position.coords.accuracy + ']';
+                        '[±' + Math.round(position.coords.accuracy) + ']';
 });

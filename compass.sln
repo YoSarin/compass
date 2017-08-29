@@ -34,9 +34,7 @@ Global
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows Phone (Universal).ActiveCfg = Debug|Windows Phone (Universal)
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows Phone (Universal).Build.0 = Debug|Windows Phone (Universal)
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows Phone (Universal).Deploy.0 = Debug|Windows Phone (Universal)
-		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows Phone 8.ActiveCfg = Debug|Windows Phone 8
-		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows Phone 8.Build.0 = Debug|Windows Phone 8
-		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows Phone 8.Deploy.0 = Debug|Windows Phone 8
+		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows Phone 8.ActiveCfg = Debug|Windows Phone (Universal)
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows-AnyCPU.ActiveCfg = Debug|Windows-AnyCPU
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows-AnyCPU.Build.0 = Debug|Windows-AnyCPU
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows-AnyCPU.Deploy.0 = Debug|Windows-AnyCPU
@@ -58,9 +56,7 @@ Global
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Release|Windows Phone (Universal).ActiveCfg = Release|Windows Phone (Universal)
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Release|Windows Phone (Universal).Build.0 = Release|Windows Phone (Universal)
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Release|Windows Phone (Universal).Deploy.0 = Release|Windows Phone (Universal)
-		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Release|Windows Phone 8.ActiveCfg = Release|Windows Phone 8
-		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Release|Windows Phone 8.Build.0 = Release|Windows Phone 8
-		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Release|Windows Phone 8.Deploy.0 = Release|Windows Phone 8
+		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Release|Windows Phone 8.ActiveCfg = Release|Windows Phone (Universal)
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Release|Windows-AnyCPU.ActiveCfg = Release|Windows-AnyCPU
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Release|Windows-AnyCPU.Build.0 = Release|Windows-AnyCPU
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Release|Windows-AnyCPU.Deploy.0 = Release|Windows-AnyCPU

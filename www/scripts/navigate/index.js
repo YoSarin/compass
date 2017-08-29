@@ -4,6 +4,7 @@
 // and then run "window.location.reload()" in the JavaScript Console.
 (function () {
     "use strict";
+    document.getElementById("import").hidden = true;
 
     document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 
@@ -12,15 +13,7 @@
         document.addEventListener('pause', onPause.bind(this), false);
         document.addEventListener('resume', onResume.bind(this), false);
 
-        // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
-        var parentElement = document.getElementById('deviceready');
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        new Clickable(document.getElementById("pointgatherer")).OnClick(function () { window.open("point_gatherer.html", "_self"); });
+        new Clickable(document.getElementById("return")).OnClick(function () { window.open("index.html", "_self"); });
     };
 
     function onPause() {

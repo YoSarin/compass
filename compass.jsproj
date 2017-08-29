@@ -25,10 +25,6 @@
       <Configuration>Debug</Configuration>
       <Platform>Windows-ARM</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|Windows Phone 8">
-      <Configuration>Debug</Configuration>
-      <Platform>Windows Phone 8</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Windows Phone (Universal)">
       <Configuration>Debug</Configuration>
       <Platform>Windows Phone (Universal)</Platform>
@@ -56,10 +52,6 @@
     <ProjectConfiguration Include="Release|Windows-ARM">
       <Configuration>Release</Configuration>
       <Platform>Windows-ARM</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Windows Phone 8">
-      <Configuration>Release</Configuration>
-      <Platform>Windows Phone 8</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Windows Phone (Universal)">
       <Configuration>Release</Configuration>
