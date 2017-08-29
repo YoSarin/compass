@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>DESKTOP-CM4N5DP</Machine>
+    <WindowsUser>marti</WindowsUser>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetOsVersion>10.0</TargetOsVersion>
+    <TargetOsDescription>Windows 10.0</TargetOsDescription>
+    <SolutionConfiguration>debug|x64</SolutionConfiguration>
+    <PackageArchitecture>x64</PackageArchitecture>
+    <PackageIdentityName>73b31530-8ccd-11e7-8218-9f3b4a98e4e0</PackageIdentityName>
+    <PackageIdentityPublisher>CN=Apache Cordova Team</PackageIdentityPublisher>
+    <IntermediateOutputPath>C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\build\windows\bld\</IntermediateOutputPath>
+    <RemoteDeploymentType>
+    </RemoteDeploymentType>
+    <PackageRegistrationPath>
+    </PackageRegistrationPath>
+    <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
+    <DeployOptionalPackages>false</DeployOptionalPackages>
+    <WindowsSdkPath>
+    </WindowsSdkPath>
+    <LayoutDir>C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\build\windows\debug\x64\win10\AppX</LayoutDir>
+    <RegisteredManifestChecksum>B01B587B29467C5C3A46456667F7B5EC103A55B10F674421BF242DFBB9489260</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>57917YoSarin.bojovka_1.0.0.1_x64__h35559jr9hy9m</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>57917YoSarin.bojovka_h35559jr9hy9m!io.cordova.myappbbf3c2</RegisteredUserModeAppID>
+    <RegisteredPackageID>57917YoSarin.bojovka</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=Apache Cordova Team</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.1</RegisteredVersion>
+    <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\build\windows\debug\x64\win10\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2017-08-29T15:22:05.417</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\images\SplashScreen.scale-100.png">
+      <PackagePath>images\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2017-08-29T15:19:37.164</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\images\Square150x150Logo.scale-100.png">
+      <PackagePath>images\Square150x150Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2017-08-29T15:19:37.180</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\images\Square30x30Logo.scale-100.png">
+      <PackagePath>images\Square30x30Logo.scale-100.png</PackagePath>
+      <Modified>2017-08-29T15:19:37.180</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\images\Square310x310Logo.scale-100.png">
+      <PackagePath>images\Square310x310Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2017-08-29T15:19:37.180</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\images\Square44x44Logo.scale-100.png">
+      <PackagePath>images\Square44x44Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2017-08-29T15:19:37.180</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\images\Square70x70Logo.scale-100.png">
+      <PackagePath>images\Square70x70Logo.scale-100.png</PackagePath>
+      <Modified>2017-08-29T15:19:37.196</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\images\Square71x71Logo.scale-100.png">
+      <PackagePath>images\Square71x71Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2017-08-29T15:19:37.196</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\images\StoreLogo.scale-100.png">
+      <PackagePath>images\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2017-08-29T15:19:37.196</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\images\Wide310x150Logo.scale-100.png">
+      <PackagePath>images\Wide310x150Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2017-08-29T15:19:37.196</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\images\cordova.png">
+      <PackagePath>www\images\cordova.png</PackagePath>
+      <Modified>2017-08-29T15:19:36.899</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\plugins\cordova-plugin-background-mode\appbeep.wma">
+      <PackagePath>appbeep.wma</PackagePath>
+      <Modified>2017-08-29T15:10:08.805</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\cordova-js-src\confighelper.js">
+      <PackagePath>www\cordova-js-src\confighelper.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.681</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\cordova-js-src\exec.js">
+      <PackagePath>www\cordova-js-src\exec.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.681</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\cordova-js-src\platform.js">
+      <PackagePath>www\cordova-js-src\platform.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.695</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\cordova-js-src\splashscreen.js">
+      <PackagePath>www\cordova-js-src\splashscreen.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.728</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\cordova.js">
+      <PackagePath>www\cordova.js</PackagePath>
+      <Modified>2017-08-29T15:19:36.883</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\cordova_plugins.js">
+      <PackagePath>www\cordova_plugins.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.743</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-background-mode\src\windows\BackgroundModeProxy.js">
+      <PackagePath>www\plugins\cordova-plugin-background-mode\src\windows\BackgroundModeProxy.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.743</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-background-mode\www\background-mode.js">
+      <PackagePath>www\plugins\cordova-plugin-background-mode\www\background-mode.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.790</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-device-orientation\src\windows\CompassProxy.js">
+      <PackagePath>www\plugins\cordova-plugin-device-orientation\src\windows\CompassProxy.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.790</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-device-orientation\www\compass.js">
+      <PackagePath>www\plugins\cordova-plugin-device-orientation\www\compass.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.790</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-device-orientation\www\CompassError.js">
+      <PackagePath>www\plugins\cordova-plugin-device-orientation\www\CompassError.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.790</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-device-orientation\www\CompassHeading.js">
+      <PackagePath>www\plugins\cordova-plugin-device-orientation\www\CompassHeading.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.790</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-device\src\windows\DeviceProxy.js">
+      <PackagePath>www\plugins\cordova-plugin-device\src\windows\DeviceProxy.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.790</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-device\www\device.js">
+      <PackagePath>www\plugins\cordova-plugin-device\www\device.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.790</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-dialogs\src\windows\NotificationProxy.js">
+      <PackagePath>www\plugins\cordova-plugin-dialogs\src\windows\NotificationProxy.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.821</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-dialogs\www\notification.js">
+      <PackagePath>www\plugins\cordova-plugin-dialogs\www\notification.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.821</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-geolocation\src\windows\GeolocationProxy.js">
+      <PackagePath>www\plugins\cordova-plugin-geolocation\src\windows\GeolocationProxy.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.821</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-geolocation\www\Coordinates.js">
+      <PackagePath>www\plugins\cordova-plugin-geolocation\www\Coordinates.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.821</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-geolocation\www\geolocation.js">
+      <PackagePath>www\plugins\cordova-plugin-geolocation\www\geolocation.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.858</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-geolocation\www\Position.js">
+      <PackagePath>www\plugins\cordova-plugin-geolocation\www\Position.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.860</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-geolocation\www\PositionError.js">
+      <PackagePath>www\plugins\cordova-plugin-geolocation\www\PositionError.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.868</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-x-socialsharing\src\windows\SocialSharingProxy.js">
+      <PackagePath>www\plugins\cordova-plugin-x-socialsharing\src\windows\SocialSharingProxy.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.868</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\cordova-plugin-x-socialsharing\www\SocialSharing.js">
+      <PackagePath>www\plugins\cordova-plugin-x-socialsharing\www\SocialSharing.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.868</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\plugins\es6-promise-plugin\www\promise.js">
+      <PackagePath>www\plugins\es6-promise-plugin\www\promise.js</PackagePath>
+      <Modified>2017-08-29T15:22:00.930</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\scripts\index.js">
+      <PackagePath>www\scripts\index.js</PackagePath>
+      <Modified>2017-08-29T15:19:36.962</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\scripts\lib\clickable.js">
+      <PackagePath>www\scripts\lib\clickable.js</PackagePath>
+      <Modified>2017-08-29T15:19:36.977</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\scripts\lib\compass.js">
+      <PackagePath>www\scripts\lib\compass.js</PackagePath>
+      <Modified>2017-08-29T15:19:36.993</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\scripts\lib\geolocation.js">
+      <PackagePath>www\scripts\lib\geolocation.js</PackagePath>
+      <Modified>2017-08-29T15:19:37.008</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\scripts\lib\point.js">
+      <PackagePath>www\scripts\lib\point.js</PackagePath>
+      <Modified>2017-08-29T15:19:37.033</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\scripts\lib\pointer.js">
+      <PackagePath>www\scripts\lib\pointer.js</PackagePath>
+      <Modified>2017-08-29T15:19:37.040</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\scripts\lib\storage.js">
+      <PackagePath>www\scripts\lib\storage.js</PackagePath>
+      <Modified>2017-08-29T15:19:37.055</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\scripts\map_creator\index.js">
+      <PackagePath>www\scripts\map_creator\index.js</PackagePath>
+      <Modified>2017-08-29T15:19:37.055</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\scripts\navigate\index.js">
+      <PackagePath>www\scripts\navigate\index.js</PackagePath>
+      <Modified>2017-08-29T15:19:37.055</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\scripts\platformOverrides.js">
+      <PackagePath>www\scripts\platformOverrides.js</PackagePath>
+      <Modified>2017-08-29T15:19:37.071</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\scripts\point_gatherer\index.js">
+      <PackagePath>www\scripts\point_gatherer\index.js</PackagePath>
+      <Modified>2017-08-29T15:19:37.086</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\scripts\winstore-jscompat.js">
+      <PackagePath>www\scripts\winstore-jscompat.js</PackagePath>
+      <Modified>2017-08-29T15:19:37.103</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\WinJS\js\base.js">
+      <PackagePath>www\WinJS\js\base.js</PackagePath>
+      <Modified>2017-08-29T15:19:36.790</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\css\index.css">
+      <PackagePath>www\css\index.css</PackagePath>
+      <Modified>2017-08-29T15:22:00.743</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\css\notification.css">
+      <PackagePath>www\css\notification.css</PackagePath>
+      <Modified>2017-08-29T15:22:00.743</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\css\splashscreen.css">
+      <PackagePath>www\css\splashscreen.css</PackagePath>
+      <Modified>2017-08-29T15:19:36.899</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\index.html">
+      <PackagePath>www\index.html</PackagePath>
+      <Modified>2017-08-29T15:19:36.915</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\map_creator.html">
+      <PackagePath>www\map_creator.html</PackagePath>
+      <Modified>2017-08-29T15:19:36.936</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\navigate.html">
+      <PackagePath>www\navigate.html</PackagePath>
+      <Modified>2017-08-29T15:19:36.946</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\www\point_gatherer.html">
+      <PackagePath>www\point_gatherer.html</PackagePath>
+      <Modified>2017-08-29T15:19:36.946</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\config.xml">
+      <PackagePath>config.xml</PackagePath>
+      <Modified>2017-08-29T15:22:00.415</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\src\github.com\YoSarin\compass\platforms\windows\build\windows\debug\x64\win10\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2017-08-29T15:22:05.180</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

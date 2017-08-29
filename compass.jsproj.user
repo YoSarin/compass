@@ -7,7 +7,7 @@
     <AppxBuildConfigurationSelection>x86|x64|arm</AppxBuildConfigurationSelection>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Windows-AnyCPU'">
-    <DebuggerFlavor>WindowsLocal</DebuggerFlavor>
+    <DebuggerFlavor>WindowsMobileDevice</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Windows-AnyCPU'">
     <DebuggerFlavor>PhoneDevice81</DebuggerFlavor>
@@ -19,5 +19,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
     <DebuggerFlavor>AndroidEmulator</DebuggerFlavor>
     <AndroidEmulatorID>AndroidDevice;Device</AndroidEmulatorID>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Windows-ARM'">
+    <DebuggerFlavor>WindowsMobileDevice</DebuggerFlavor>
   </PropertyGroup>
 </Project>
