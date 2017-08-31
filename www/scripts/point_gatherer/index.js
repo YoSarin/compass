@@ -27,7 +27,22 @@
         new Clickable(document.getElementById("location")).OnClick(Location.Record);
         new Clickable(document.getElementById("flushAll")).OnClick(Storage.Flush);
         new Clickable(document.getElementById("share")).OnClick(Storage.Share);
-        new Clickable(document.getElementById("mapCreator")).OnClick(function () { window.open("map_creator.html", "_self"); });
+        new Clickable(document.getElementById("mapCreator")).OnClick(function () {
+            window.location.assign("map_creator.html");
+        });
+
+        Location.AddWatcher(function (position) {
+            var element = document.getElementById("location");
+            style = window.getComputedStyle(element);
+            if (element.style.backgroundColor != "cornflowerBlue") {
+                element.style.backgroundColor = "cornflowerBlue";
+            } else {
+                element.style.backgroundColor = "darkCyan";
+            }
+            element.innerHTML = position.coords.latitude.toString().substring(0, 6) + ':' +
+                position.coords.longitude.toString().substring(0, 6) + '@' +
+                '[±' + Math.round(position.coords.accuracy) + ']';
+        });
     };
 
     function onPause() {

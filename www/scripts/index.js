@@ -20,7 +20,7 @@
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
 
-        new Clickable(document.getElementById("pointgatherer")).OnClick(function () { window.open("point_gatherer.html", "_self"); });
+        new Clickable(document.getElementById("pointgatherer")).OnClick(function () { window.location.assign("point_gatherer.html"); });
     };
 
     function onPause() {

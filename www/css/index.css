@@ -102,6 +102,11 @@ textarea.import {
     height: 70%;
 }
 
+.navigate #distance {
+    font-size: 2em;
+    text-align: center;
+}
+
 @keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }

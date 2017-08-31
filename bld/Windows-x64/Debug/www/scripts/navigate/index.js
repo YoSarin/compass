@@ -13,6 +13,8 @@
         document.addEventListener('pause', onPause.bind(this), false);
         document.addEventListener('resume', onResume.bind(this), false);
 
+        var container = document.getElementById("svgContainer");
+
         new Clickable(document.getElementById("return")).OnClick(function () { window.open("index.html", "_self"); });
     };
 

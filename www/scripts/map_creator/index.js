@@ -36,7 +36,7 @@
             var text = svg.outerHTML;
             window.plugins.socialsharing.share(text, null, null, null);
         });
-        new Clickable(document.getElementById("return")).OnClick(function () { window.open("index.html", "_self"); });
+        new Clickable(document.getElementById("return")).OnClick(function () { window.location.assign("index.html"); });
     };
 
     function onPause() {

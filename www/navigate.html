@@ -15,14 +15,19 @@
         <title>compass</title>
     </head>
     <body>
-        <div class="app">
-            <h1 id="title" class="blink">Tracking...</h1>
+        <div class="app navigate">
+            <h1 id="title">Tracking</h1>
             <div id="svgContainer"></div>
+            <div id="distance"></div>
             <a id="return" class="event share">Zpět</a>
         </div>
+        <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="scripts/navigate/index.js"></script>
         <script type="text/javascript" src="scripts/lib/clickable.js"></script>
         <script type="text/javascript" src="scripts/lib/pointer.js"></script>
         <script type="text/javascript" src="scripts/lib/point.js"></script>
+        <script type="text/javascript" src="scripts/lib/storage.js"></script>
+        <script type="text/javascript" src="scripts/lib/geolocation.js"></script>
+        <script type="text/javascript" src="scripts/lib/compass.js"></script>
     </body>
 </html>

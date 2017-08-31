@@ -1,5 +1,6 @@
 ﻿var Storage = {
     key: "locations",
+    navigateKey: "navigateTo",
     locations: [],
     table: document.getElementById("coords"),
     locationWatchers: [],
@@ -56,7 +57,11 @@
                 })
             );
 
-            var pointer = new Pointer(point);
+            var pointer = new Pointer(point, 1);
+            new Clickable(pointer.SVG()).OnClick(function () {
+                window.localStorage.setItem(Storage.navigateKey, JSON.stringify(loc["position"]));
+                window.location.assign("navigate.html");
+            });
             row.querySelector("td.direction").appendChild(pointer.SVG());
 
             Storage.directionWatchers.push(
@@ -104,6 +109,10 @@
     Share: function () {
         var text = JSON.stringify(Storage.locations);
         window.plugins.socialsharing.share(text, null, null, null);
+    },
+
+    NavigateTo: function () {
+        return JSON.parse(window.localStorage.getItem(Storage.navigateKey));
     }
 }
 

@@ -59,16 +59,7 @@
     "cordova-plugin-device": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-device"
-        },
-        "is_top_level": false,
-        "variables": {}
-    },
-    "cordova-plugin-background-mode": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/YoSarin/cordova-plugin-background-mode",
-            "subdir": "."
+            "id": "cordova-plugin-device@1.1.6"
         },
         "is_top_level": true,
         "variables": {}

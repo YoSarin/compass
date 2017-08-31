@@ -63,16 +63,3 @@
 Location.AddWatcher(function (position) {
     Location.current = position;
 });
-
-Location.AddWatcher(function (position) {
-    var element = document.getElementById("location");
-    style = window.getComputedStyle(element);
-    if (element.style.backgroundColor != "cornflowerBlue") {
-        element.style.backgroundColor = "cornflowerBlue";
-    } else {
-        element.style.backgroundColor = "darkCyan";
-    }
-    element.innerHTML = position.coords.latitude.toString().substring(0, 6) + ':' +
-                        position.coords.longitude.toString().substring(0, 6) + '@' +
-                        '[±' + Math.round(position.coords.accuracy) + ']';
-});

@@ -1,35 +1,6 @@
 ﻿cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "id": "cordova-plugin-device.device",
-        "file": "plugins/cordova-plugin-device/www/device.js",
-        "pluginId": "cordova-plugin-device",
-        "clobbers": [
-            "device"
-        ]
-    },
-    {
-        "id": "cordova-plugin-device.DeviceProxy",
-        "file": "plugins/cordova-plugin-device/src/windows/DeviceProxy.js",
-        "pluginId": "cordova-plugin-device",
-        "runs": true
-    },
-    {
-        "id": "cordova-plugin-background-mode.BackgroundMode",
-        "file": "plugins/cordova-plugin-background-mode/www/background-mode.js",
-        "pluginId": "cordova-plugin-background-mode",
-        "clobbers": [
-            "cordova.plugins.backgroundMode",
-            "plugin.backgroundMode"
-        ]
-    },
-    {
-        "id": "cordova-plugin-background-mode.BackgroundMode.Proxy",
-        "file": "plugins/cordova-plugin-background-mode/src/windows/BackgroundModeProxy.js",
-        "pluginId": "cordova-plugin-background-mode",
-        "runs": true
-    },
-    {
         "id": "cordova-plugin-device-orientation.CompassError",
         "file": "plugins/cordova-plugin-device-orientation/www/CompassError.js",
         "pluginId": "cordova-plugin-device-orientation",
@@ -130,20 +101,33 @@ module.exports = [
         "file": "plugins/cordova-plugin-x-socialsharing/src/windows/SocialSharingProxy.js",
         "pluginId": "cordova-plugin-x-socialsharing",
         "runs": true
+    },
+    {
+        "id": "cordova-plugin-device.device",
+        "file": "plugins/cordova-plugin-device/www/device.js",
+        "pluginId": "cordova-plugin-device",
+        "clobbers": [
+            "device"
+        ]
+    },
+    {
+        "id": "cordova-plugin-device.DeviceProxy",
+        "file": "plugins/cordova-plugin-device/src/windows/DeviceProxy.js",
+        "pluginId": "cordova-plugin-device",
+        "runs": true
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "cordova-plugin-device": "1.1.6",
-    "cordova-plugin-background-mode": "0.7.2",
     "cordova-plugin-compat": "1.1.0",
     "cordova-plugin-device-orientation": "1.0.7",
     "cordova-plugin-dialogs": "1.3.3",
     "cordova-plugin-geolocation": "2.4.3",
     "cordova-plugin-whitelist": "1.3.2",
     "es6-promise-plugin": "4.1.0",
-    "cordova-plugin-x-socialsharing": "5.2.0"
+    "cordova-plugin-x-socialsharing": "5.2.0",
+    "cordova-plugin-device": "1.1.6"
 };
 // BOTTOM OF METADATA
 });

@@ -4,19 +4,34 @@
 // and then run "window.location.reload()" in the JavaScript Console.
 (function () {
     "use strict";
-    document.getElementById("import").hidden = true;
 
-    document.addEventListener('deviceready', onDeviceReady.bind(this), false);
-
-    function onDeviceReady() {
+    document.addEventListener('deviceready', function() {
         // Handle the Cordova pause and resume events
         document.addEventListener('pause', onPause.bind(this), false);
         document.addEventListener('resume', onResume.bind(this), false);
 
         var container = document.getElementById("svgContainer");
+        var box = container.getBoundingClientRect();
+        var target = Storage.NavigateTo();
+        var point = new Point(target.coords.longitude, target.coords.latitude);
+        var pointer = new Pointer(target, 1);
 
-        new Clickable(document.getElementById("return")).OnClick(function () { window.open("index.html", "_self"); });
-    };
+        pointer.Resize(box.width);
+        container.appendChild(pointer.SVG());
+
+        Location.Watch();
+        compass.Watch();
+
+        Location.AddWatcher(function (position) {
+            document.getElementById("distance").innerHTML = Math.round(point.DistanceTo(new Point(position.coords.longitude, position.coords.latitude)));
+        });
+
+        compass.AddWatcher(function (heading) {
+            pointer.PointTo(heading, Location.CurrentPoint());
+        });
+
+        new Clickable(document.getElementById("return")).OnClick(function () { window.location.assign("index.html"); });
+    }.bind(this), false);
 
     function onPause() {
         // TODO: This application has been suspended. Save application state here.

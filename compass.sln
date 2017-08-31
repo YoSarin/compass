@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "compass", "compass.jsproj", "{1A40725C-CA43-4928-9CE0-60C017ADD451}"
 EndProject
@@ -35,9 +35,9 @@ Global
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows Phone (Universal).Build.0 = Debug|Windows Phone (Universal)
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows Phone (Universal).Deploy.0 = Debug|Windows Phone (Universal)
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows Phone 8.ActiveCfg = Debug|Windows Phone (Universal)
-		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows-AnyCPU.ActiveCfg = Debug|Windows-AnyCPU
-		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows-AnyCPU.Build.0 = Debug|Windows-AnyCPU
-		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows-AnyCPU.Deploy.0 = Debug|Windows-AnyCPU
+		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows-AnyCPU.ActiveCfg = Debug|Windows-ARM
+		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows-AnyCPU.Build.0 = Debug|Windows-ARM
+		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows-AnyCPU.Deploy.0 = Debug|Windows-ARM
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows-ARM.ActiveCfg = Debug|Windows-ARM
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows-ARM.Build.0 = Debug|Windows-ARM
 		{1A40725C-CA43-4928-9CE0-60C017ADD451}.Debug|Windows-ARM.Deploy.0 = Debug|Windows-ARM
@@ -72,5 +72,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B382996-2BA8-42C1-83AD-3AA8DB5213ED}
 	EndGlobalSection
 EndGlobal
