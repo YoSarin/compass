@@ -11,8 +11,8 @@
         {
             "position": {
                 "coords": {
-                    "latitude": 50.0412915,
-                    "longitude": 14.3232936,
+                    "latitude": 50.041001,
+                    "longitude": 14.3212227,
                     "accuracy": 7,
                     "altitude": 471,
                     "heading": null,

@@ -15,7 +15,6 @@
 
         var svg = document.getElementById("svgDrawing");
 
-
         Storage.Load();
 
         if (Storage.locations.length > 0) {
@@ -55,10 +54,14 @@
 
     function onPause() {
         // TODO: This application has been suspended. Save application state here.
+        Location.Stop();
+        compass.Stop();
     };
 
     function onResume() {
         // TODO: This application has been reactivated. Restore application state here.
+        Location.Watch();
+        compass.Watch();
     };
 })();
 
