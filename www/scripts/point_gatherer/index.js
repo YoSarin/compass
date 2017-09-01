@@ -33,7 +33,6 @@
 
         Location.AddWatcher(function (position) {
             var element = document.getElementById("location");
-            style = window.getComputedStyle(element);
             if (element.style.backgroundColor != "cornflowerBlue") {
                 element.style.backgroundColor = "cornflowerBlue";
             } else {

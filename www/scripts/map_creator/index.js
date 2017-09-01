@@ -37,6 +37,20 @@
             window.plugins.socialsharing.share(text, null, null, null);
         });
         new Clickable(document.getElementById("return")).OnClick(function () { window.location.assign("index.html"); });
+
+        Location.Watch();
+        compass.Watch();
+
+        Location.AddWatcher(function (position) {
+            mapWithPosition(svg, Storage.locations, position);
+        });
+
+        var pointer = new Pointer(new Point(0, 0), 5);
+        document.getElementById("heading").appendChild(pointer.SVG());
+
+        compass.AddWatcher(function (heading) {
+            pointer.PointTo(heading, Location.CurrentPoint());
+        });
     };
 
     function onPause() {
@@ -71,10 +85,12 @@ function drawSVG(data, svg) {
         var x = recalc.x(item.position.coords.longitude, width) + padding;
         var y = recalc.y(item.position.coords.latitude, height) + padding;
 
-        var c = circle.cloneNode();
-        c.setAttribute("cx", x);
-        c.setAttribute("cy", y);
-        svg.appendChild(c);
+        if (item.text != "🚹") {
+            var c = circle.cloneNode();
+            c.setAttribute("cx", x);
+            c.setAttribute("cy", y);
+            svg.appendChild(c);
+        }
 
         var t = text.cloneNode();
         t.setAttribute("y", y - 2);
@@ -85,6 +101,19 @@ function drawSVG(data, svg) {
         t.setAttribute("x", x - (bbox.width/2));
     });
 
+}
+
+function mapWithPosition(svg, data, position) {
+    var allPoints = data.slice(0);
+    allPoints.push({
+        "position": position,
+        "text": "🚹",
+        "time": Math.floor(Date.now() / 1000)
+    });
+    while (svg.lastChild) {
+        svg.removeChild(svg.lastChild);
+    }
+    drawSVG(allPoints, svg);
 }
 
 function findBounds(data) {

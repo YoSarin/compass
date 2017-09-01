@@ -59,7 +59,7 @@
 
             var pointer = new Pointer(point, 1);
             new Clickable(pointer.SVG()).OnClick(function () {
-                window.localStorage.setItem(Storage.navigateKey, JSON.stringify(loc["position"]));
+                window.localStorage.setItem(Storage.navigateKey, JSON.stringify(loc));
                 window.location.assign("navigate.html");
             });
             row.querySelector("td.direction").appendChild(pointer.SVG());

@@ -16,16 +16,19 @@
     </head>
     <body>
         <div class="app">
-            <h1 id="title">Treasure hunt</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Loading...</p>
-                <a id="location" class="event received">Ready</a>
+            <div id="deviceready">
+                <h1 id="title">Treasure hunt</h1>
+                <p id="description"></p>
+                <div id="compass"></div>
+                <div id="distance"></div>
             </div>
             <a id="pointgatherer" class="event share">[ gather points ]</a>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="scripts/platformOverrides.js"></script>
         <script type="text/javascript" src="scripts/index.js"></script>
+        <script type="text/javascript" src="scripts/lib/locations.js"></script>
+        <script type="text/javascript" src="scripts/lib/quest.js"></script>
         <script type="text/javascript" src="scripts/lib/clickable.js"></script>
         <script type="text/javascript" src="scripts/lib/geolocation.js"></script>
         <script type="text/javascript" src="scripts/lib/compass.js"></script>

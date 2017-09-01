@@ -8,7 +8,7 @@ Compass.prototype = {
         if (this.watchID !== null) {
             return;
         }
-        this.watchID = navigator.compass.watchHeading(this.success.bind(this), this.error.bind(this));
+        this.watchID = navigator.compass.watchHeading(this.success.bind(this), this.error.bind(this), { frequency: 10 });
     },
 
     Stop: function() {

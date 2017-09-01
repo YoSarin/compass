@@ -13,8 +13,8 @@
         var container = document.getElementById("svgContainer");
         var box = container.getBoundingClientRect();
         var target = Storage.NavigateTo();
-        var point = new Point(target.coords.longitude, target.coords.latitude);
-        var pointer = new Pointer(target, 1);
+        var point = new Point(target["position"].coords.longitude, target["position"].coords.latitude);
+        var pointer = new Pointer(point, 1);
 
         pointer.Resize(box.width);
         container.appendChild(pointer.SVG());
@@ -22,12 +22,16 @@
         Location.Watch();
         compass.Watch();
 
+        document.getElementById("name").innerHTML = target["text"];
+
         Location.AddWatcher(function (position) {
-            document.getElementById("distance").innerHTML = Math.round(point.DistanceTo(new Point(position.coords.longitude, position.coords.latitude)));
+            document.getElementById("distance").innerHTML =
+                Math.round(point.DistanceTo(new Point(position.coords.longitude, position.coords.latitude))) + " ± " + Math.round(position.coords.accuracy + target["position"].coords.accuracy);
         });
 
         compass.AddWatcher(function (heading) {
             pointer.PointTo(heading, Location.CurrentPoint());
+            document.getElementById("heading").innerHTML = Math.round(heading.magneticHeading) + " ± " + Math.round(heading.headingAccuracy);
         });
 
         new Clickable(document.getElementById("return")).OnClick(function () { window.location.assign("index.html"); });

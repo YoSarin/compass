@@ -27,9 +27,19 @@ Point.prototype = {
         return Math.sqrt(lat * lat + long * long);
     },
 
-    DirectionTo : function (otherPoint) {
-        var direction = Math.atan2(this.longDistanceTo(otherPoint), this.latDistanceTo(otherPoint));
-        direction = 360 * direction / (2 * Math.PI);
+    DirectionTo: function (otherPoint) {
+        λ1 = this.long.toRad();
+        φ1 = this.lat.toRad();
+        λ2 = otherPoint.long.toRad();
+        φ2 = otherPoint.lat.toRad();
+
+        var y = Math.sin(λ2 - λ1) * Math.cos(φ2);
+        var x = Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(λ2 - λ1);
+
+        var direction = Math.atan2(y, x).toDegrees();
+        if (direction < 0) {
+            direction = 360 + direction;
+        }
         return direction;
     }
 }
@@ -39,4 +49,24 @@ if (typeof (Number.prototype.toRad) === "undefined") {
     Number.prototype.toRad = function () {
         return this * Math.PI / 180;
     }
+}
+if (typeof (Number.prototype.toDegrees) === "undefined") {
+    Number.prototype.toDegrees = function () {
+        return this * 180 / Math.PI;
+    }
+}
+
+testDirections = function () {
+    var p = [
+        new Point(14.00, 50.00),
+        new Point(14.00, 52.00),
+        new Point(14.00, 48.00),
+        new Point(10.00, 50.00),
+        new Point(18.00, 50.00),
+    ];
+
+    console.log(p[0].DirectionTo(p[1]));
+    console.log(p[0].DirectionTo(p[2]));
+    console.log(p[0].DirectionTo(p[3]));
+    console.log(p[0].DirectionTo(p[4]));
 }

@@ -13,14 +13,20 @@
         document.addEventListener('resume', onResume.bind(this), false);
 
         // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
-        var parentElement = document.getElementById('deviceready');
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
         new Clickable(document.getElementById("pointgatherer")).OnClick(function () { window.location.assign("point_gatherer.html"); });
+
+        var quest = new LinearQuest(function () {
+            navigator.notification.alert("Výborně, teď už jen stačí najít poklad!");
+        });
+
+        Location.Watch();
+        compass.Watch();
+
+        quest.AddTask(new SearchTask(locations.GetPoint("doma"), 40, "Jdi domů", function () { alert("Jsi doma!"); }));
+        quest.AddTask(new SearchTask(locations.GetPoint("mostek (baterka schovaná v trubce?)"), 10, "najdi mostek", function () { alert("Našla jsi mostek, gratuluju!"); }));
+        quest.AddTask(new SearchTask(locations.GetPoint("tři břízky"), 10, "pokračujeme dál", null));
+
+        quest.Start();
     };
 
     function onPause() {
