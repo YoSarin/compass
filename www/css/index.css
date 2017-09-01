@@ -107,6 +107,12 @@ textarea.import {
     text-align: center;
 }
 
+#restart {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
 @keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }

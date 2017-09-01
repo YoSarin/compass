@@ -2,7 +2,11 @@
     watchID: null,
     current: null,
 
+    status: "inactive",
+
     watchers: [],
+
+    timer: null,
 
     CurrentPoint: function () {
         if (Location.current === null) {
@@ -21,6 +25,7 @@
             return;
         }
         Location.watchID = navigator.geolocation.watchPosition(Location.success, Location.error, { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true })
+        Location.timer = window.setTimeout(Location.reset, 5000);
     },
 
     Record: function () {
@@ -35,7 +40,23 @@
         });
     },
 
+    reset: function () {
+        Location.status = "inactive";
+        document.dispatchEvent(new CustomEvent("gps-signal-lost"));
+        Location.Stop();
+        Location.Watch();
+    },
+
     success: function (position) {
+        window.clearTimeout(Location.timeout);
+        Location.timer = window.setTimeout(Location.reset, 5000);
+
+        Location.current = position;
+        if (Location.status != "active") {
+            document.dispatchEvent(new CustomEvent("gps-signal-found"));
+            Location.status = "active";
+        }
+
         Location.watchers.forEach(function (watcher, idx) {
             watcher(position);
         });
@@ -59,7 +80,3 @@
         });
     }
 }
-
-Location.AddWatcher(function (position) {
-    Location.current = position;
-});

@@ -18,11 +18,15 @@
         <div class="app">
             <div id="deviceready">
                 <h1 id="title">Treasure hunt</h1>
+                <div id="nogps" class="blink">
+                    <div class="event delete">GPS nemá signál</div>
+                </div>
                 <p id="description"></p>
                 <div id="compass"></div>
                 <div id="distance"></div>
+                <div id="buttons"></div>
             </div>
-            <a id="restart" class="event share">[ try again ]</a>
+            <a id="restart">♻</a>
             <a id="pointgatherer" class="event share">[ gather points ]</a>
         </div>
         <script type="text/javascript" src="cordova.js"></script>

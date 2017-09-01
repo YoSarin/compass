@@ -6,7 +6,15 @@
     this.lastStartPoint = null;
     this.defaultWidth = 20;
 
+    this.needleShape = [
+        [1 / 2, 2 / 3],
+        [2 / 7, 5 / 6],
+        [1 / 2, 1 / 8],
+        [5 / 7, 5 / 6]
+    ];
+
     this.svg = this.initSVG();
+    this.Redraw();
 }
 
 Pointer.prototype = {
@@ -20,45 +28,15 @@ Pointer.prototype = {
         this.svg.setAttribute("width", (this.scale * this.defaultWidth).toString());
         this.svg.setAttribute("height", (this.scale * this.defaultWidth).toString());
 
-        var line = this.svg.querySelector("line");
+        var line = this.svg.querySelector(".needle");
         var direction = Math.round(currentLocation.DirectionTo(this.pointLocation) - heading.magneticHeading);
-        var x = this.pointX(direction);
-        var y = this.pointY(direction);
-        line.setAttribute("x2", x.toString());
-        line.setAttribute("y2", y.toString());
-        /*
-        var north = this.svg.querySelector(".north");
-        direction = Math.round(360 - heading.magneticHeading);
-        x = this.pointX(direction);
-        y = this.pointY(direction);
-        north.setAttribute("x2", x.toString());
-        north.setAttribute("y2", y.toString());
-
-        var asimute = this.svg.querySelector(".asimute");
-        direction = Math.round(currentLocation.DirectionTo(this.pointLocation));
-        x = this.pointX(direction);
-        y = this.pointY(direction);
-        asimute.setAttribute("x2", x.toString());
-        asimute.setAttribute("y2", y.toString());
-        */
+        var center = ((this.defaultWidth * this.scale) / 2).toString();
+        line.setAttribute("transform", "rotate(" + direction.toString() + ", " + center + ", " + center + ")");
+        return;
     },
 
     SVG: function () {
         return this.svg;
-    },
-
-    pointX: function (directionInDegrees) {
-        var angleInRadians = directionInDegrees.toRad();
-        var radius = (this.defaultWidth / 2) * this.scale;
-
-        return radius + Math.round(radius * Math.sin(angleInRadians));
-    },
-
-    pointY: function (directionInDegrees) {
-        var angleInRadians = directionInDegrees.toRad();
-        var radius = (this.defaultWidth / 2) * this.scale;
-
-        return radius - Math.round(radius * Math.cos(angleInRadians));
     },
 
     initSVG: function () {
@@ -70,35 +48,14 @@ Pointer.prototype = {
         svg.setAttribute("height", size.toString());
 
         var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        circle.setAttribute("cx", (size / 2).toString());
-        circle.setAttribute("cy", (size / 2).toString());
-        circle.setAttribute("r", (size / 3).toString());
-        circle.setAttribute("stroke", "black");
-        circle.setAttribute("stroke-width", "1");
-        circle.setAttribute("fill", "white");
+        circle.setAttribute("style", "stroke:#e4e4e4;stroke-width:1;fill:#e6e6e6;");
         svg.appendChild(circle);
 
-        var pointer = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        pointer.setAttribute("x1", (size / 2).toString());
-        pointer.setAttribute("y1", (size / 2).toString());
-        pointer.setAttribute("style", "stroke:rgb(255,0,0);stroke-width:1");
-        svg.appendChild(pointer);
+        var needle = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        needle.setAttribute("style", "stroke:#aaa;stroke-width:1;fill:#eee;");
+        needle.setAttribute("class", "needle");
+        svg.appendChild(needle);
 
-        /*
-        var northPointer = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        northPointer.setAttribute("class", "north");
-        northPointer.setAttribute("x1", (size / 2).toString());
-        northPointer.setAttribute("y1", (size / 2).toString());
-        northPointer.setAttribute("style", "stroke:rgb(40,40,40);stroke-width:1");
-        svg.appendChild(northPointer);
-
-        var asimute = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        asimute.setAttribute("class", "asimute");
-        asimute.setAttribute("x1", (size / 2).toString());
-        asimute.setAttribute("y1", (size / 2).toString());
-        asimute.setAttribute("style", "stroke:rgb(0,0,255);stroke-width:1");
-        svg.appendChild(asimute);
-        */
         return svg;
     },
 
@@ -113,19 +70,23 @@ Pointer.prototype = {
         circle.setAttribute("cy", (size / 2).toString());
         circle.setAttribute("r", (size / 3).toString());
 
-        var pointer = this.svg.querySelector("line");
-        pointer.setAttribute("x1", (size / 2).toString());
-        pointer.setAttribute("y1", (size / 2).toString());
-        /*
-        var northPointer = this.svg.querySelector(".north");
-        northPointer.setAttribute("x1", (size / 2).toString());
-        northPointer.setAttribute("y1", (size / 2).toString());
-
-        var asimute = this.svg.querySelector(".asimute");
-        asimute.setAttribute("x1", (size / 2).toString());
-        asimute.setAttribute("y1", (size / 2).toString());
-        */
-        this.PointTo(this.lastHeading, this.lastStartPoint);
+        var needle = this.svg.querySelector(".needle");
+        var path = "";
+        this.needleShape.forEach(function (coords, index) {
+            if (index == 0) {
+                path += "M";
+            } else {
+                path += " L";
+            }
+            path += (Math.round(coords[0] * size)).toString();
+            path += " ";
+            path += (Math.round(coords[1] * size)).toString();
+        });
+        path += " Z";
+        needle.setAttribute("d", path);
+        if (this.lastHeading && this.lastStartPoint) {
+            this.PointTo(this.lastHeading, this.lastStartPoint);
+        }
     },
 
     rescale: function (scale) {

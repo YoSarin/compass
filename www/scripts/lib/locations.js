@@ -11,6 +11,42 @@
         {
             "position": {
                 "coords": {
+                    "latitude": 49.989591,
+                    "longitude": 17.4450033,
+                    "accuracy": 0,
+                },
+                "timestamp": "2017-08-26T17:12:58.826Z"
+            },
+            "text": "bruntál",
+            "time": 1503767580
+        },
+        {
+            "position": {
+                "coords": {
+                    "latitude": 50.01745,
+                    "longitude": 16.6781068,
+                    "accuracy": 0,
+                },
+                "timestamp": "2017-08-26T17:12:58.826Z"
+            },
+            "text": "čenkovice",
+            "time": 1503767580
+        },
+        {
+            "position": {
+                "coords": {
+                    "latitude": 50.12105,
+                    "longitude": 15.0756788,
+                    "accuracy": 0,
+                },
+                "timestamp": "2017-08-26T17:12:58.826Z"
+            },
+            "text": "mekáč",
+            "time": 1503767580
+        },
+        {
+            "position": {
+                "coords": {
                     "latitude": 50.041001,
                     "longitude": 14.3212227,
                     "accuracy": 7,
