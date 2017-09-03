@@ -1,40 +1,56 @@
-﻿var task = function () {
-    this.quest = null;
+﻿Require("lib/geolocation");
+Require("lib/pointer");
+Require("lib/clickable");
 
-    this.distanceElement = document.getElementById("distance");
-    this.compassElement = document.getElementById("compass");
-    this.descriptionElement = document.getElementById("description");
-    this.buttonsElement = document.getElementById("buttons");
+var task = function (quest, title, description) {
+    this.title = title;
+    this.description = description;
+    this.quest = quest;
+    this.quest.AddTask(this);
 }
 
 task.prototype = {
-    SetQuest: function (quest) {
-        if (this.quest != null) {
-            return false;
-        }
-        this.quest = quest;
-        return true;
-    },
-
     Accomplished: function () {
         this.cleanup();
         this.quest.Next();
     },
 
+    Start: function () {
+        this.cleanup();
+        this.titleElement().innerHTML = this.title;
+        this.descriptionElement().innerHTML = this.description;
+    },
+
     cleanup: function () {
-        this.compassElement.innerHTML = "";
-        this.descriptionElement.innerHTML = "Načítám další úkol...";
-        this.distanceElement.innerHTML = "";
-        this.buttonsElement.innerHTML = "";
-    }
+        this.quest.cleanup();
+    },
+
+    titleElement: function () {
+        return this.quest.titleElement;
+    },
+
+    distanceElement: function () {
+        return this.quest.distanceElement;
+    },
+
+    compassElement: function () {
+        return this.quest.compassElement;
+    },
+
+    descriptionElement: function () {
+        return this.quest.descriptionElement;
+    },
+
+    buttonsElement: function () {
+        return this.quest.buttonsElement;
+    },
 }
 
-var SearchTask = function (targetPoint, targetTolerance, description, success) {
-    task.call(this);
+var SearchTask = function (quest, title, description, targetPoint, targetTolerance, success) {
+    task.call(this, quest, title, description);
 
     this.target = targetPoint;
     this.tolerance = targetTolerance;
-    this.description = description;
     this.success = success;
 
     this.compassWatcher = null;
@@ -45,12 +61,13 @@ SearchTask.prototype = Object.create(task.prototype);
 SearchTask.prototype.constructor = SearchTask;
 
 SearchTask.prototype.Start = function () {
+    task.prototype.Start.call(this);
     var pointer = new Pointer(this.target, 1);
-    var bbox = this.compassElement.getBoundingClientRect();
+    var bbox = this.compassElement().getBoundingClientRect();
     pointer.Resize(bbox.width);
 
-    this.descriptionElement.innerHTML = this.description;
-    this.compassElement.appendChild(pointer.SVG());
+    this.descriptionElement().innerHTML = this.description;
+    this.compassElement().appendChild(pointer.SVG());
 
     this.compassWatcher = compass.AddWatcher(function (heading) {
         pointer.PointTo(heading, Location.CurrentPoint());
@@ -58,8 +75,8 @@ SearchTask.prototype.Start = function () {
 
     this.locationWatcher = Location.AddWatcher(function (position) {
         var distance = Location.CurrentPoint().DistanceTo(this.target);
-        this.distanceElement.innerHTML = Math.round(distance) + " ± " + position.coords.accuracy;
-        if ((distance - position.coords.accuracy) < this.tolerance && position.coords.accuracy < this.tolerance) {
+        this.distanceElement().innerHTML = Math.round(distance) + " ± " + position.coords.accuracy;
+        if (distance < this.tolerance && position.coords.accuracy < 20) {
             this.done();
         }
     }.bind(this));
@@ -89,50 +106,137 @@ SearchTask.prototype.done = function () {
     this.quest.Next();
 };
 
-var TextTask = function (description) {
-    task.call(this);
+SearchTask.prototype.getPoint = function () {
+    return this.target;
+};
 
-    this.description = description;
+var HiddenSearchTask = function (quest, title, description, targetPoint, targetTolerance, success) {
+    SearchTask.call(this, quest, title, description, targetPoint, targetTolerance, success);
+};
+
+HiddenSearchTask.prototype = Object.create(SearchTask.prototype);
+HiddenSearchTask.prototype.constructor = HiddenSearchTask;
+
+HiddenSearchTask.prototype.Start = function () {
+    task.prototype.Start.call(this);
+    this.descriptionElement().innerHTML = this.description;
+    
+    this.locationWatcher = Location.AddWatcher(function (position) {
+        var distance = Location.CurrentPoint().DistanceTo(this.target);
+        this.distanceElement().innerHTML = 'Vzdálenost: <span class="red">' + Math.round(distance) + "</span> ± " + position.coords.accuracy;
+        this.distanceElement
+        if (distance < this.tolerance && position.coords.accuracy < 20) { // třeba 20
+            this.done();
+        }
+    }.bind(this));
+};
+
+
+var DelayTask = function (quest, title, description, delay) {
+    task.call(this, quest, title, description);
+    this.delay = delay;
+    this.timeout = null;
+};
+
+DelayTask.prototype = Object.create(task.prototype);
+DelayTask.prototype.constructor = DelayTask;
+
+DelayTask.prototype.Start = function () {
+    task.prototype.Start.call(this);
+
+    this.timeout = window.setTimeout(function() { this.Accomplished(); }.bind(this), this.delay)
+
+};
+
+
+DelayTask.prototype.cleanup = function () {
+    task.prototype.cleanup.call(this);
+
+    if (this.timeout) {
+        window.clearTimeout(this.timeout);
+    }
+}
+
+
+var TextTask = function (quest, title, description, buttonText) {
+    task.call(this, quest, title, description);
+    this.buttonText = buttonText;
 };
 
 TextTask.prototype = Object.create(task.prototype);
 TextTask.prototype.constructor = TextTask;
 
 TextTask.prototype.Start = function () {
-    this.descriptionElement.innerHTML = this.description;
+    task.prototype.Start.call(this);
+    
+
     var button = document.createElement("div");
     button.setAttribute("class", "event share");
-    button.textContent = "Jasný, jedem dál!";
+
+    button.textContent = this.buttonText;
     new Clickable(button).OnClick(function () {
         this.Accomplished();
     }.bind(this));
 
-    this.buttonsElement.appendChild(button);
+    this.buttonsElement().appendChild(button);
 };
 
-var LinearQuest = function (finishCallback) {
+
+TextTask.prototype.cleanup = function () {
+    task.prototype.cleanup.call(this);
+}
+
+
+var FinishTask = function (quest, title, description) {
+    task.call(this, quest, title, description);
+};
+
+FinishTask.prototype = Object.create(task.prototype);
+FinishTask.prototype.constructor = FinishTask;
+
+FinishTask.prototype.Start = function () {
+    task.prototype.Start.call(this);
+};
+
+var LinearQuest = function () {
     this.tasks = [];
     this.currentTask = 0;
-    this.finish = finishCallback;
 
     this.key = "questPosition";
+    this.mapKey = "questPoints";
+
+    this.titleElement = document.getElementById("title");
+    this.distanceElement = document.getElementById("distance");
+    this.compassElement = document.getElementById("compass");
+    this.descriptionElement = document.getElementById("description");
+    this.buttonsElement = document.getElementById("buttons");
+
 }
 
 LinearQuest.prototype = {
     AddTask: function (task) {
-        if (task.SetQuest(this)) {
-            this.tasks.push(task);
-            return true;
-        }
-        return false;
+        this.tasks.push(task);
     },
     Next: function () {
-        window.localStorage.setItem(this.key, (++this.currentTask).toString());
-        this.go();
+        if (this.currentTask + 1 < this.tasks.length) {
+            this.tasks[this.currentTask].cleanup();
+            window.localStorage.setItem(this.key, (++this.currentTask).toString());
+            this.go();
+        }
+    },
+    Previous: function () {
+        if (this.currentTask > 0) {
+            this.tasks[this.currentTask].cleanup();
+            window.localStorage.setItem(this.key, (--this.currentTask).toString());
+            this.go();
+        }
     },
     Restart: function () {
-        this.tasks[this.currentTask].cleanup();
+        if (this.currentTask < this.tasks.length) {
+            this.tasks[this.currentTask].cleanup();
+        }
         this.currentTask = 0;
+        window.localStorage.setItem(this.key, 0);
         this.go();
     },
     Continue: function () {
@@ -142,11 +246,40 @@ LinearQuest.prototype = {
         }
         this.go();
     },
+
     go: function () {
         if (this.currentTask >= this.tasks.length) {
             this.Finish();
         } else {
             this.tasks[this.currentTask].Start();
         }
+    },
+
+    cleanup: function () {
+        this.titleElement.innerHTML = "Treasure hunt";
+        this.compassElement.innerHTML = "";
+        this.descriptionElement.innerHTML = "Načítám další úkol...";
+        this.distanceElement.innerHTML = "";
+        this.buttonsElement.innerHTML = "";
+    },
+
+    map: function () {
+        var locations = [];
+        this.tasks.forEach(function (task, index) {
+            if (typeof (task.getPoint) != 'undefined' && index <= this.currentTask) {
+                var point = task.getPoint();
+                locations.push({
+                    position: {
+                        coords: {
+                            latitude: point.lat,
+                            longitude: point.long,
+                        },
+                    },
+                    text: task.title,
+                });
+            }
+        }.bind(this));
+        window.localStorage.setItem(this.mapKey, JSON.stringify(locations));
+        window.location.assign("map_creator.html");
     }
 }

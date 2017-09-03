@@ -1,4 +1,10 @@
-﻿var Storage = {
+﻿Require("lib/point");
+Require("lib/pointer");
+Require("lib/geolocation");
+Require("lib/clickable");
+Require("lib/compass");
+
+var Storage = {
     key: "locations",
     navigateKey: "navigateTo",
     locations: [],

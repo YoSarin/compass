@@ -15,27 +15,21 @@
         <title>compass</title>
     </head>
     <body>
-        <svg class="app">
-            <h1>Map Creator</h1>
-            <div id="import">
+        <div class="app">
+            <h1>Mapa</h1>
+            <div id="import" style="display:none;">
                 <textarea id="data" class="import"></textarea>
                 <a id="submit" class="event share">Zkus</a>
             </div>
             <div id="svgContainer">
                 <svg id="svgDrawing" xmlns="http://www.w3.org/2000/svg"></svg>
             </div>
-            <svg id="heading"></svg>
-            <a id="export" class="event share">Export</a>
+            <!-- <a id="export" class="event share">Export</a> -->
             <a id="return" class="event share">Zpět</a>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="scripts/lib/require.js"></script>
         <script type="text/javascript" src="scripts/platformOverrides.js"></script>
         <script type="text/javascript" src="scripts/map_creator/index.js"></script>
-        <script type="text/javascript" src="scripts/lib/clickable.js"></script>
-        <script type="text/javascript" src="scripts/lib/geolocation.js"></script>
-        <script type="text/javascript" src="scripts/lib/compass.js"></script>
-        <script type="text/javascript" src="scripts/lib/storage.js"></script>
-        <script type="text/javascript" src="scripts/lib/point.js"></script>
-        <script type="text/javascript" src="scripts/lib/pointer.js"></script>
     </body>
 </html>

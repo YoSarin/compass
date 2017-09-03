@@ -1,6 +1,9 @@
-﻿var Location = {
+﻿Require("lib/point");
+
+var Location = {
     watchID: null,
     current: null,
+    lastChange: new Date(),
 
     status: "inactive",
 
@@ -25,7 +28,9 @@
             return;
         }
         Location.watchID = navigator.geolocation.watchPosition(Location.success, Location.error, { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true })
-        Location.timer = window.setTimeout(Location.reset, 5000);
+        if (Location.timer == null) {
+            Location.timer = window.setTimeout(Location.reset, 5000);
+        }
     },
 
     Record: function () {
@@ -41,29 +46,49 @@
     },
 
     reset: function () {
-        Location.status = "inactive";
-        document.dispatchEvent(new CustomEvent("gps-signal-lost"));
-        Location.Stop();
-        Location.Watch();
+        try {
+            Location.status = "inactive";
+            document.dispatchEvent(new CustomEvent("gps-signal-lost"));
+            Location.Stop();
+            Location.Watch();
+        } catch (e) {
+            new ErrorHandler(e).Save().ReThrow();
+        }
     },
 
     success: function (position) {
-        window.clearTimeout(Location.timeout);
-        Location.timer = window.setTimeout(Location.reset, 5000);
+        try {
+            if (position.coords.accuracy > 30) {
+                return;
+            }
 
-        Location.current = position;
-        if (Location.status != "active") {
-            document.dispatchEvent(new CustomEvent("gps-signal-found"));
-            Location.status = "active";
+            if (Location.lastChange >= position.timestamp) {
+                return;
+            }
+
+            Location.lastChange = position.timestamp;
+
+            if (Location.timeout) {
+                window.clearTimeout(Location.timeout);
+            }
+
+            Location.timer = window.setTimeout(Location.reset, 5000);
+
+            Location.current = position;
+            document.dispatchEvent(new CustomEvent("gps-signal-ok"));
+
+            Location.watchers.forEach(function (watcher, idx) {
+                watcher(position);
+            });
+
+        } catch (e) {
+            new ErrorHandler(e).Save().ReThrow();
         }
-
-        Location.watchers.forEach(function (watcher, idx) {
-            watcher(position);
-        });
     },
 
     error: function (err) {
-        alert('code: ' + err.code + '\n' + 'message: ' + err.message + '\n');
+        // navigator.notification.alert('code: ' + err.code + '\n' + 'message: ' + err.message + '\n');
+        Location.reset();
     },
 
     Stop: function () {

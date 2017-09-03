@@ -107,10 +107,66 @@ textarea.import {
     text-align: center;
 }
 
-#restart {
+#description {
+    text-align: left;
+    text-transform: none;
+}
+
+#footer {
     position: absolute;
-    right: 10px;
     bottom: 10px;
+    width: 100%;
+    height: 20px;
+}
+
+#restart, #map, #next, #prev {
+    padding: 8px;
+    float: right;
+}
+
+#status {
+    font-size: 0.6em;
+    text-align: left;
+    float: left;
+}
+
+#status .item {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+}
+
+.code {
+    padding: 5px;
+    margin: 3px;
+    font-family: monospace;
+    background-color: #444;
+    color: #ddd;
+    text-align: justify;
+    text-transform: none;
+}
+
+.red {
+    color: red;
+}
+
+.code .error {
+    color: #b44;
+}
+
+.hidden {
+    display: none;
+}
+
+#errorList {
+    text-transform: none;
+    background-color: #fdd;
+    padding: 10px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    color: #a22;
 }
 
 @keyframes fade {

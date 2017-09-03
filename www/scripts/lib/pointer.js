@@ -96,6 +96,7 @@ Pointer.prototype = {
 }
 
 var pointerTest = function () {
+    Require("lib/point");
     var p = [
         new Point(14.00, 50.00),
         new Point(14.00, 52.00),

@@ -1,4 +1,6 @@
-﻿var locations = {
+﻿Require("lib/point");
+
+var locations = {
     GetPoint: function (name) {
         var item = this.data.find(function (element) {
             return element["text"] == name;

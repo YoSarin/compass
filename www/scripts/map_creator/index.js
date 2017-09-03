@@ -4,7 +4,10 @@
 // and then run "window.location.reload()" in the JavaScript Console.
 (function () {
     "use strict";
-    document.getElementById("import").hidden = true;
+
+    Require("lib/geolocation");
+    Require("lib/compass");
+    Require("lib/clickable");
 
     document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 
@@ -16,40 +19,49 @@
         var svg = document.getElementById("svgDrawing");
 
         Storage.Load();
+        var locations = Storage.locations;
 
-        if (Storage.locations.length > 0) {
+        var questData = window.localStorage.getItem("questPoints");
+        if (questData) {
+            locations = JSON.parse(questData);
+            drawSVG(locations, svg);
+        } else if (Storage.locations.length > 0) {
             drawSVG(Storage.locations, svg);
         } else {
-            document.getElementById("import").hidden = false;
+            document.getElementById("import").style.display = "block";
             document.getElementById("submit").addEventListener("click", function () {
                 var stringData = document.getElementById("data").textContent.trim();
                 var data = JSON.parse(stringData);
                 if (data) {
-                    document.getElementById("import").hidden = true;
+                    document.getElementById("import").style.display = "none";;
                     drawSVG(data, svg);
                 }
             });
         };
 
+        /*
         new Clickable(document.getElementById("export")).OnClick(function () {
             var text = svg.outerHTML;
             window.plugins.socialsharing.share(text, null, null, null);
         });
+        */
         new Clickable(document.getElementById("return")).OnClick(function () { window.location.assign("index.html"); });
 
         Location.Watch();
         compass.Watch();
 
         Location.AddWatcher(function (position) {
-            mapWithPosition(svg, Storage.locations, position);
+            mapWithPosition(svg, locations, position);
         });
 
+        /*
         var pointer = new Pointer(new Point(0, 0), 5);
         document.getElementById("heading").appendChild(pointer.SVG());
 
         compass.AddWatcher(function (heading) {
             pointer.PointTo(heading, Location.CurrentPoint());
         });
+        */
     };
 
     function onPause() {
@@ -72,8 +84,14 @@ function drawSVG(data, svg) {
     var recalc = findBounds(data);
 
     var padding = 20;
+
     var width = bbox.width - 2*padding;
-    var height = width/recalc.aspectRatio();
+    var height = width / recalc.aspectRatio();
+
+    if (height > bbox.height) {
+        height = bbox.height - 2 * padding;
+        width = height * recalc.aspectRatio();
+    }
     svg.setAttribute("height", (height + 2 * padding).toString() + "px");
 
     var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
@@ -82,11 +100,27 @@ function drawSVG(data, svg) {
     circle.setAttribute("stroke-width", "1");
     circle.setAttribute("r", "2");
 
+    var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("style", "stroke:black;stroke-width:1;");
+
     var text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+
+    var lastPoint = null;
 
     data.forEach(function (item, index) {
         var x = recalc.x(item.position.coords.longitude, width) + padding;
         var y = recalc.y(item.position.coords.latitude, height) + padding;
+
+        if (lastPoint && item.text != "🚹") {
+            var x2 = recalc.x(lastPoint.position.coords.longitude, width) + padding;
+            var y2 = recalc.y(lastPoint.position.coords.latitude, height) + padding;
+            var l = line.cloneNode();
+            l.setAttribute("x1", x);
+            l.setAttribute("y1", y);
+            l.setAttribute("x2", x2);
+            l.setAttribute("y2", y2);
+            svg.appendChild(l);
+        }
 
         if (item.text != "🚹") {
             var c = circle.cloneNode();
@@ -101,7 +135,9 @@ function drawSVG(data, svg) {
         t.textContent = item.text;
         svg.appendChild(t);
         var bbox = t.getBBox();
-        t.setAttribute("x", x - (bbox.width/2));
+        t.setAttribute("x", x - (bbox.width / 2));
+
+        lastPoint = item;
     });
 
 }
