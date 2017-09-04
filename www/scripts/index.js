@@ -11,7 +11,7 @@
     Require("lib/geolocation");
     Require("lib/compass");
     Require("data/locations");
-    Require("data/quest_chata");
+    Require("data/quest_praha");
 
     document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 
@@ -92,7 +92,7 @@
         Location.Watch();
         compass.Watch();
 
-        var activeQuest = Quest.Load(chataQuest());
+        var activeQuest = Quest.Load(prahaQuest());
         activeQuest.Continue();
     };
 

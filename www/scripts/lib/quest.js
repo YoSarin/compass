@@ -291,8 +291,9 @@ LinearQuest.prototype = {
     },
     Continue: function () {
         this.currentTask = parseInt(window.localStorage.getItem(this.key));
-        if (!this.currentTask) {
-            this.currentTask = 0;
+        if (!this.currentTask || this.currentTask > this.task.length) {
+            this.Restart();
+            return;
         }
         this.go();
     },
