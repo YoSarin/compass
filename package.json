@@ -1,7 +1,8 @@
 {
-    "name": "compass",
-    "version": "1.0.0",
-    "private": true,
-    "dependencies": {
-    }
+  "name": "compass",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "cordova-android": "^6.2.3"
+  }
 }

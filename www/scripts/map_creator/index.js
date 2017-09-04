@@ -5,9 +5,11 @@
 (function () {
     "use strict";
 
+    Require("lib/error_handler");
     Require("lib/geolocation");
     Require("lib/compass");
     Require("lib/clickable");
+    Require("lib/storage");
 
     document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 

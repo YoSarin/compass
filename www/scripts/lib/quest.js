@@ -75,7 +75,7 @@ SearchTask.prototype.Start = function () {
 
     this.locationWatcher = Location.AddWatcher(function (position) {
         var distance = Location.CurrentPoint().DistanceTo(this.target);
-        this.distanceElement().innerHTML = Math.round(distance) + " ± " + position.coords.accuracy;
+        this.distanceElement().innerHTML = '<span class="red">' + Math.round(distance) + "</span> ± " + position.coords.accuracy;
         if (distance < this.tolerance && position.coords.accuracy < 20) {
             this.done();
         }
@@ -123,7 +123,7 @@ HiddenSearchTask.prototype.Start = function () {
     
     this.locationWatcher = Location.AddWatcher(function (position) {
         var distance = Location.CurrentPoint().DistanceTo(this.target);
-        this.distanceElement().innerHTML = 'Vzdálenost: <span class="red">' + Math.round(distance) + "</span> ± " + position.coords.accuracy;
+        this.distanceElement().innerHTML = '<span class="red">' + Math.round(distance) + "</span> ± " + position.coords.accuracy;
         this.distanceElement
         if (distance < this.tolerance && position.coords.accuracy < 20) { // třeba 20
             this.done();
@@ -147,7 +147,6 @@ DelayTask.prototype.Start = function () {
     this.timeout = window.setTimeout(function() { this.Accomplished(); }.bind(this), this.delay)
 
 };
-
 
 DelayTask.prototype.cleanup = function () {
     task.prototype.cleanup.call(this);
@@ -186,6 +185,19 @@ TextTask.prototype.cleanup = function () {
     task.prototype.cleanup.call(this);
 }
 
+var ScannerTask = function (quest, data, button) {
+    new DelayTask(quest, "Scanner",
+        '<div class="code blink">&gt; connecting to wireless storage...</div>',
+        1000);
+    new DelayTask(quest, "Scanner",
+        '<div class="code blink">&gt; reading data</div>',
+        900);
+    new TextTask(quest, "Scanner",
+        '<div class="code">&gt; dumping data<br />' +
+        data +
+        '</div>',
+        button);
+}
 
 var FinishTask = function (quest, title, description) {
     task.call(this, quest, title, description);
@@ -198,7 +210,43 @@ FinishTask.prototype.Start = function () {
     task.prototype.Start.call(this);
 };
 
+var Quest = function () { }
+
+Quest.Load = function (json) {
+    if (typeof json == "string") {
+        json = JSON.parse(json);
+    }
+    var quest = null;
+    switch (json.type) {
+        case "linear":
+            quest = new LinearQuest();
+    }
+
+    json.tasks.forEach(function (task, idx) {
+        switch (task.type) {
+            case "text":
+                new TextTask(quest, task.title, task.text, task.button);
+                break;
+            case "search":
+                new SearchTask(quest, task.title, task.text, task.point, task.precision, null);
+                break;
+            case "hidden_search":
+                new HiddenSearchTask(quest, task.title, task.text, task.point, task.precision, null);
+                break;
+            case "scanner":
+                new ScannerTask(quest, task.text, task.button);
+                break;
+            case "finish":
+                new FinishTask(quest, task.title, task.text);
+                break;
+        }
+    });
+
+    return quest;
+}
+
 var LinearQuest = function () {
+    Quest.call(this);
     this.tasks = [];
     this.currentTask = 0;
 
@@ -210,8 +258,10 @@ var LinearQuest = function () {
     this.compassElement = document.getElementById("compass");
     this.descriptionElement = document.getElementById("description");
     this.buttonsElement = document.getElementById("buttons");
-
 }
+
+LinearQuest.prototype = Object.create(Quest.prototype);
+LinearQuest.prototype.constructor = LinearQuest;
 
 LinearQuest.prototype = {
     AddTask: function (task) {

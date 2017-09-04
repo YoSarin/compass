@@ -46,44 +46,35 @@ var Location = {
     },
 
     reset: function () {
-        try {
-            Location.status = "inactive";
-            document.dispatchEvent(new CustomEvent("gps-signal-lost"));
-            Location.Stop();
-            Location.Watch();
-        } catch (e) {
-            new ErrorHandler(e).Save().ReThrow();
-        }
+        Location.status = "inactive";
+        document.dispatchEvent(new CustomEvent("gps-signal-lost"));
+        Location.Stop();
+        Location.Watch();
     },
 
     success: function (position) {
-        try {
-            if (position.coords.accuracy > 30) {
-                return;
-            }
-
-            if (Location.lastChange >= position.timestamp) {
-                return;
-            }
-
-            Location.lastChange = position.timestamp;
-
-            if (Location.timeout) {
-                window.clearTimeout(Location.timeout);
-            }
-
-            Location.timer = window.setTimeout(Location.reset, 5000);
-
-            Location.current = position;
-            document.dispatchEvent(new CustomEvent("gps-signal-ok"));
-
-            Location.watchers.forEach(function (watcher, idx) {
-                watcher(position);
-            });
-
-        } catch (e) {
-            new ErrorHandler(e).Save().ReThrow();
+        if (position.coords.accuracy > 30) {
+            return;
         }
+
+        if (Location.lastChange >= position.timestamp) {
+            return;
+        }
+
+        Location.lastChange = position.timestamp;
+
+        if (Location.timeout) {
+            window.clearTimeout(Location.timeout);
+        }
+
+        Location.timer = window.setTimeout(Location.reset, 5000);
+
+        Location.current = position;
+        document.dispatchEvent(new CustomEvent("gps-signal-ok"));
+
+        Location.watchers.forEach(function (watcher, idx) {
+            watcher(position);
+        });
     },
 
     error: function (err) {

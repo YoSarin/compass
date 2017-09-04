@@ -9,8 +9,10 @@ Compass.prototype = {
         if (this.watchID !== null) {
             return;
         }
-        this.watchID = navigator.compass.watchHeading(this.success.bind(this), this.error.bind(this), { frequency: 300 });
-        this.inactivityTimer();
+        if (navigator.compass) {
+            this.watchID = navigator.compass.watchHeading(this.success.bind(this), this.error.bind(this), { frequency: 300 });
+            this.inactivityTimer();
+        }
     },
 
     Stop: function () {
@@ -44,24 +46,16 @@ Compass.prototype = {
     },
 
     reset: function () {
-        try {
-            this.Stop();
-            this.Watch();
-        } catch (e) {
-            new ErrorHandler(e).Save().ReThrow();
-        }
+        this.Stop();
+        this.Watch();
     },
  
     success: function (heading) {
-        try {
-            this.inactivityTimer();
-            document.dispatchEvent(new CustomEvent("compass-signal-ok"));
-            this.watchers.forEach(function (watcher, idx) {
-                watcher(heading);
-            });
-        } catch (e) {
-            new ErrorHandler(e).Save().ReThrow();
-        }
+        this.inactivityTimer();
+        document.dispatchEvent(new CustomEvent("compass-signal-ok"));
+        this.watchers.forEach(function (watcher, idx) {
+            watcher(heading);
+        });
     },
 
     error: function (err) {

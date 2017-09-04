@@ -15,25 +15,31 @@
         <title>compass</title>
     </head>
     <body>
-        <div class="app">
+        <div class="app quest">
             <div id="deviceready">
                 <h1 id="title">Treasure hunt</h1>
-                <p id="description"></p>
+                <div id="description">
+                    <center>
+                        <span class="blink event waiting">loading</span>
+                    </center>
+                </div>
                 <div id="compass"></div>
                 <div id="distance"></div>
                 <div id="buttons"></div>
             </div>
             <div id="footer">
-                <a id="restart">♻</a>
-                <a id="map">&#x1f5fa;</a>
-                <a id="next" class="hidden">&rArr;</a>
-                <a id="prev" class="hidden">&lArr;</a>
+                <a id="restart" class="icon">♻</a>
+                <a id="map" class="icon">&#x1f5fa;</a>
+                <span id="cheat" class="hidden">
+                    <a id="pointgatherer" class="icon">🏳</a>
+                    <a id="next" class="icon">&rArr;</a>
+                    <a id="prev" class="icon">&lArr;</a>
+                </span>
                 <div id="status">
-                    <div><span class="item" id="gps_status"></span> GPS</div>
-                    <div><span class="item" id="compass_status"></span> Compass</div>
+                    <div><span class="item" id="gps_status">📶</span> GPS</div>
+                    <div><span class="item" id="compass_status">📶</span> Compass</div>
                 </div>
             </div>
-            <a id="pointgatherer" class="event share" style="display:none">[ gather points ]</a>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="scripts/lib/require.js"></script>

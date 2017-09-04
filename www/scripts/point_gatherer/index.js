@@ -4,6 +4,10 @@
 // and then run "window.location.reload()" in the JavaScript Console.
 (function () {
     "use strict";
+    Require("lib/error_handler");
+    Require("lib/storage");
+    Require("lib/geolocation");
+    Require("lib/clickable");
 
     document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 

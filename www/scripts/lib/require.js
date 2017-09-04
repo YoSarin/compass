@@ -8,5 +8,6 @@
     }
     var script = document.createElement("script");
     script.setAttribute("src", scriptName);
+    script.setAttribute("async", false);
     document.body.appendChild(script);
 }

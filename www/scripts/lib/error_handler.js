@@ -1,5 +1,11 @@
-﻿var ErrorHandler = function (err) {
-    this.err = err;
+﻿Require("lib/clickable");
+
+var ErrorHandler = function (msg, url, line, col, error) {
+    this.msg = msg;
+    this.url = url;
+    this.line = line;
+    this.col = col;
+    this.error = error;
 }
 
 ErrorHandler.prototype.ReThrow = function () {
@@ -8,7 +14,7 @@ ErrorHandler.prototype.ReThrow = function () {
 
 ErrorHandler.prototype.Save = function () {
     var errors = ErrorHandler.Load();
-    errors.push({ message: this.err.toString(), stacktrace: this.err.stack });
+    errors.push(this);
     ErrorHandler.save(errors);
     return this;
 }
@@ -41,6 +47,10 @@ ErrorHandler.Show = function () {
         el.innerHTML = JSON.stringify(err);
         element.appendChild(el);
     });
+    new Clickable(element).OnMultiClick(function () {
+        ErrorHandler.Hide();
+        ErrorHandler.Clear();
+    }, 3);
 }
 
 ErrorHandler.Hide = function () {
@@ -70,3 +80,14 @@ ErrorHandler.Clear = function () {
 ErrorHandler.Key = function () {
     return "storage:errors";
 }
+
+window.onerror = function (msg, url, line, col, error) {
+    (new ErrorHandler(msg, url, line, col, error)).Save();
+
+    console.error(msg, url + ":" + line + ":" + col, error);
+
+    var suppressErrorAlert = true;
+    // If you return true, then error alerts (like in older versions of 
+    // Internet Explorer) will be suppressed.
+    return suppressErrorAlert;
+};
