@@ -1,15 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { FlatList, StyleSheet, Text, View, Button } from 'react-native'
 import { NavigationScreenProp } from "react-navigation"
+import {AsyncStorage} from 'react-native'
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
+
 
 export class Main extends React.Component<{navigation:NavigationScreenProp<any>}> {
 
+  private positionWatch:number = null;
   private location:string = "unknown";
   private gpsCounter:number = 0;
-  private positionWatch:number = -1;
-
+  private storedLocations:array = [];
 
   componentDidMount() {
+      const {status, permissions} = Location.requestPermissionsAsync()
       this.watchLocation()
   }
 
@@ -17,26 +22,23 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
     this.stopWatch()
   }
 
-  private watchLocation() {
-    this.stopWatch()
-    this.positionWatch = navigator.geolocation.watchPosition((position) => {
-      this.location = "" + position.coords.latitude + ";" + position.coords.longitude + " [±" + position.coords.accuracy + "]"
+  private async watchLocation() {
+    await this.stopWatch()
+    this.positionWatch = Location.watchPositionAsync({
+      accuracy: Location.Accuracy.Highest,
+      timeInterval: 1000,
+      distanceInterval: 0,
+    }, (position) => {
+      console.log(position)
+      this.location = "" + position.coords.latitude + ";" + position.coords.longitude + " [±" + position.coords.accuracy + "]",
       this.gpsCounter++
-      this.setState(() => {return {reload: true} } )
-    }, (error) => {
-      this.location = error.message
-      this.gpsCounter++
-      this.setState(() => {return {reload: true} } )
-    }, {
-      timeout: 1000,
-      enableHighAccuracy: true,
-      maximumAge: 60000
+      this.setState({refresh: true})
     })
   }
 
-  private stopWatch() {
-    if (this.positionWatch >= 0) {
-      navigator.geolocation.clearWatch(this.positionWatch)
+  private async stopWatch() {
+    if (this.positionWatch != null && typeof(this.positionWatch) === 'object') {
+      (await this.positionWatch).remove()
     }
   }
 
@@ -45,10 +47,23 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
       <View style={styles.container}>
         <Text>Typescript! Version 2!</Text>
         <Text>{this.location}</Text>
-        <Text>{this.gpsCounter}</Text>
+        <Text>refresshed: {this.gpsCounter}</Text>
+        <Text>Stored: {this.storedLocations.length}</Text>
+        <Button
+          onPress={ () => {
+            this.storedLocations.push(this.location)
+            this.setState({refresh: true})
+          }}
+          title="Store location"
+        />
+        <FlatList
+          data={this.storedLocations}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item}) => <Text>{item}</Text>}
+          extraData={this.storedLocations.length} />
         <Button
           onPress={ () => this.props.navigation.navigate("Modal")}
-          title="bububu"
+          title="Modal"
         />
       </View>
     );
