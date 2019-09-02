@@ -4,7 +4,5 @@ module.exports = {
     "@babel/preset-react",
     "babel-preset-expo"
   ],
-  plugins: [
-    ["@babel/plugin-proposal-class-properties"]
-  ]
+  plugins: []
 };
