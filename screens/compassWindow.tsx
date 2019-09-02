@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Compass, CompassProps } from '../components/compass';
+import { Compass } from '../components/compass';
 
-export default class Modal extends React.Component {
+export default class CompassWindow extends React.Component {
 
   render() {
     return (
       <View style={styles.container}>
-        <Compass scale={1} direction={46} />
+        <Compass scale={30} />
       </View>
     )
   }

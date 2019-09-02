@@ -1,18 +1,16 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native'
-import Modal from "./screens/modal"
+import CompassWindow from "./screens/compassWindow"
 import { Main } from "./screens/main"
-import { createStackNavigator } from "react-navigation"
+import { createStackNavigator } from "react-navigation-stack"
+import { createAppContainer } from "react-navigation"
 
 
-export default createStackNavigator({
+const AppNavigator = createStackNavigator({
   Main: { screen: Main },
-  Modal: { screen: Modal },
+  CompassWindow: { screen: CompassWindow },
 }, {
-  initialRouteName: "Main",
-  transitionConfig: () => ({
-    transitionSpec: {
-      duration: 0
-    }
-  })
+  initialRouteName: "Main"
 })
+
+const AppContainer = createAppContainer(AppNavigator)
+
+export default AppContainer
