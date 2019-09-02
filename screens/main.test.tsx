@@ -1,6 +1,5 @@
 import React from 'react';
 import { Main } from './main';
-import { NavigationScreenProp } from "react-navigation"
 import renderer from 'react-test-renderer';
 
 var navigation:any
