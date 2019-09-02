@@ -7,7 +7,7 @@ var navigation:any
 
 describe("Compass", () => {
   beforeEach(() => {
-    navigation = jest.fn<NavigationScreenProp<any>>()
+    navigation = jest.fn()
   })
 
   it('renders without crashing', () => {

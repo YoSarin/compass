@@ -6,7 +6,7 @@ import renderer from 'react-test-renderer';
 var navigation:any
 
 beforeEach(() => {
-  navigation = jest.fn<NavigationScreenProp<any>>()
+  navigation = jest.fn()
 })
 
 it('renders without crashing', () => {

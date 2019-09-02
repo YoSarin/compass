@@ -1,20 +1,18 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, View, Button } from 'react-native'
 import { NavigationScreenProp } from "react-navigation"
-import {AsyncStorage} from 'react-native'
 import * as Location from 'expo-location';
-import * as Permissions from 'expo-permissions';
 
 
 export class Main extends React.Component<{navigation:NavigationScreenProp<any>}> {
 
-  private positionWatch:number = null;
+  private positionWatch:{remove():void} = {remove : () => {}};
   private location:string = "unknown";
   private gpsCounter:number = 0;
-  private storedLocations:array = [];
+  private storedLocations:Array<string> = [];
 
-  componentDidMount() {
-      const {status, permissions} = Location.requestPermissionsAsync()
+  async componentDidMount() {
+      await Location.requestPermissionsAsync()
       this.watchLocation()
   }
 
@@ -24,7 +22,7 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
 
   private async watchLocation() {
     await this.stopWatch()
-    this.positionWatch = Location.watchPositionAsync({
+    this.positionWatch = await Location.watchPositionAsync({
       accuracy: Location.Accuracy.Highest,
       timeInterval: 1000,
       distanceInterval: 0,
@@ -38,7 +36,7 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
 
   private async stopWatch() {
     if (this.positionWatch != null && typeof(this.positionWatch) === 'object') {
-      (await this.positionWatch).remove()
+      this.positionWatch.remove()
     }
   }
 
@@ -58,7 +56,7 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
         />
         <FlatList
           data={this.storedLocations}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={(_, index) => index.toString()}
           renderItem={({item}) => <Text>{item}</Text>}
           extraData={this.storedLocations.length} />
         <Button
