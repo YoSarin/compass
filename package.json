@@ -17,7 +17,6 @@
     "babel-preset-expo": "^6.0.0",
     "jest": "^24.9.0",
     "jest-expo": "^34.0.1",
-    "react-native-jest-mocks": "^1.5.0",
     "react-native-typescript-transformer": "^1.2.10",
     "react-test-renderer": "^16.3.1",
     "ts-jest": "^22.4.6",
