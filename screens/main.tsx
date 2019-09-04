@@ -2,8 +2,7 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, View, Button } from 'react-native'
 import { NavigationScreenProp } from "react-navigation"
 import * as Location from 'expo-location';
-import { Compass } from '../components/compass';
-
+import { Pointer } from '../components';
 
 export class Main extends React.Component<{navigation:NavigationScreenProp<any>}> {
 
@@ -12,8 +11,8 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
   private location:string = "unknown";
   private gpsCounter:number = 0;
   private storedLocations:Array<string> = [];
-  private compass:Compass|null = null;
-  private magCompass:Compass|null = null;
+  private compass:Pointer|null = null;
+  private magCompass:Pointer|null = null;
 
   async componentDidMount() {
       await Location.requestPermissionsAsync()
@@ -37,10 +36,10 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
       this.setState({refresh: true})
     })
     this.headingWatch = await Location.watchHeadingAsync((heading) => {
-      if (this.compass instanceof Compass) {
+      if (this.compass instanceof Pointer) {
         this.compass.pointTo(heading.trueHeading)
       }
-      if (this.magCompass instanceof Compass) {
+      if (this.magCompass instanceof Pointer) {
         this.magCompass.pointTo(heading.magHeading)
       }
     })
@@ -66,10 +65,10 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
         </View>
         <View style={{flex:2, flexDirection: "row"}}>
           <View style={{flex:1}}>
-            <Compass scale={10} ref={(compass) => this.compass = compass} />
+            <Pointer scale={10} ref={(pointer) => this.compass = pointer} />
           </View>
           <View style={{flex:1}}>
-            <Compass scale={10} ref={(compass) => this.magCompass = compass} style={{ arrowColor: "blue" }} />
+            <Pointer scale={10} style={{ arrowColor: "blue" }} ref={(pointer) => this.magCompass = pointer} />
           </View>
         </View>
         <View style={{flex: 4}}>

@@ -13,7 +13,7 @@ export interface CompassStyle {
   circleColor?:string
 }
 
-export class Compass extends React.Component<CompassProps> {
+export class Pointer extends React.Component<CompassProps> {
   static defaultProps = {
     scale: 1,
     direction: 0,
@@ -38,9 +38,9 @@ export class Compass extends React.Component<CompassProps> {
 
   constructor(props:CompassProps) {
     super(props)
-    this.scale = props.scale ? props.scale : Compass.defaultProps.scale
-    this.direction = props.direction ? props.direction : Compass.defaultProps.direction
-    this.style = { ...Compass.defaultProps.style, ...props.style }
+    this.scale = props.scale ? props.scale : Pointer.defaultProps.scale
+    this.direction = props.direction ? props.direction : Pointer.defaultProps.direction
+    this.style = { ...Pointer.defaultProps.style, ...props.style }
   }
 
   public rescaleBy(multiplier:number) {
@@ -55,22 +55,22 @@ export class Compass extends React.Component<CompassProps> {
 
   public needlePath():string {
     var path = "";
-    Compass.shape.forEach((coords, index) => {
+    Pointer.shape.forEach((coords, index) => {
         if (index == 0) {
             path += "M";
         } else {
             path += " L";
         }
-        path += (Math.round(coords[0] * Compass.defaultSize)).toString();
+        path += (Math.round(coords[0] * Pointer.defaultSize)).toString();
         path += " ";
-        path += (Math.round(coords[1] * Compass.defaultSize)).toString();
+        path += (Math.round(coords[1] * Pointer.defaultSize)).toString();
     });
     path += " Z";
     return path
   }
 
   private needleRotation():string {
-    var center = (Compass.defaultSize / 2)
+    var center = (Pointer.defaultSize / 2)
     return "rotate(" + this.direction + ", " + center + ", " + center + ")"
   }
 
@@ -81,10 +81,10 @@ export class Compass extends React.Component<CompassProps> {
           StyleSheet.absoluteFill,
           { alignItems: 'center', justifyContent: 'center' },
         ]}>
-        <Svg height={Compass.defaultSize*this.scale} width={Compass.defaultSize*this.scale} >
+        <Svg height={Pointer.defaultSize*this.scale} width={Pointer.defaultSize*this.scale} >
           <G scale={this.scale}>
-            <Circle r={Compass.defaultSize/4} cx={Compass.defaultSize/2} cy={Compass.defaultSize/2} fill="transparent" stroke={this.style.circleColor} strokeWidth={0.01*Compass.defaultSize} />
-            <Path d={ this.needlePath() } transform={this.needleRotation()} fill="white" stroke={this.style.arrowColor} strokeWidth={0.01*Compass.defaultSize} />
+            <Circle r={Pointer.defaultSize/4} cx={Pointer.defaultSize/2} cy={Pointer.defaultSize/2} fill="transparent" stroke={this.style.circleColor} strokeWidth={0.01*Pointer.defaultSize} />
+            <Path d={ this.needlePath() } transform={this.needleRotation()} fill="white" stroke={this.style.arrowColor} strokeWidth={0.01*Pointer.defaultSize} />
           </G>
         </Svg>
       </View>
