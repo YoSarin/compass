@@ -2,18 +2,18 @@ import React from "react"
 import { View, StyleSheet } from 'react-native';
 import Svg, { Circle, Path, G } from 'react-native-svg';
 
-export interface CompassProps {
+export interface PointerProps {
   scale?:number
   direction?:number
-  style?:CompassStyle
+  style?:PointerStyle
 }
 
-export interface CompassStyle {
+export interface PointerStyle {
   arrowColor?:string
   circleColor?:string
 }
 
-export class Pointer extends React.Component<CompassProps> {
+export class Pointer<T extends PointerProps> extends React.Component<T> {
   static defaultProps = {
     scale: 1,
     direction: 0,
@@ -25,7 +25,7 @@ export class Pointer extends React.Component<CompassProps> {
 
   private scale:number
   private direction:number
-  private style:CompassStyle
+  private style:PointerStyle
 
   private static shape = [
       [1 / 2, 2 / 3],
@@ -36,7 +36,7 @@ export class Pointer extends React.Component<CompassProps> {
 
   private static defaultSize = 20
 
-  constructor(props:CompassProps) {
+  constructor(props:T) {
     super(props)
     this.scale = props.scale ? props.scale : Pointer.defaultProps.scale
     this.direction = props.direction ? props.direction : Pointer.defaultProps.direction

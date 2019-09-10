@@ -2,17 +2,14 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, View, Button } from 'react-native'
 import { NavigationScreenProp } from "react-navigation"
 import * as Location from 'expo-location';
-import { Pointer } from '../components';
+import { Compass, HeadingType } from '../components';
 
 export class Main extends React.Component<{navigation:NavigationScreenProp<any>}> {
 
   private positionWatch:{remove():void} = {remove : () => {}};
-  private headingWatch:{remove():void} = {remove : () => {}};
   private location:string = "unknown";
   private gpsCounter:number = 0;
   private storedLocations:Array<string> = [];
-  private compass:Pointer|null = null;
-  private magCompass:Pointer|null = null;
 
   async componentDidMount() {
       await Location.requestPermissionsAsync()
@@ -35,22 +32,11 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
       this.gpsCounter++
       this.setState({refresh: true})
     })
-    this.headingWatch = await Location.watchHeadingAsync((heading) => {
-      if (this.compass instanceof Pointer) {
-        this.compass.pointTo(heading.trueHeading)
-      }
-      if (this.magCompass instanceof Pointer) {
-        this.magCompass.pointTo(heading.magHeading)
-      }
-    })
   }
 
   private async stopWatch() {
     if (this.positionWatch != null && typeof(this.positionWatch) === 'object') {
       this.positionWatch.remove()
-    }
-    if (this.headingWatch != null && typeof(this.headingWatch) === 'object') {
-      this.headingWatch.remove()
     }
   }
 
@@ -65,10 +51,13 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
         </View>
         <View style={{flex:2, flexDirection: "row"}}>
           <View style={{flex:1}}>
-            <Pointer scale={10} ref={(pointer) => this.compass = pointer} />
+            <Compass scale={10} />
           </View>
           <View style={{flex:1}}>
-            <Pointer scale={10} style={{ arrowColor: "blue" }} ref={(pointer) => this.magCompass = pointer} />
+            <Compass scale={10} style={{ arrowColor: "green" }} />
+          </View>
+          <View style={{flex:1}}>
+            <Compass scale={10} style={{ arrowColor: "blue" }} headingType={HeadingType.Magnetic} />
           </View>
         </View>
         <View style={{flex: 4}}>
