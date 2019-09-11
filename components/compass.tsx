@@ -27,7 +27,6 @@ export class Compass extends Pointer<CompassProps> {
 
   private async startHeadingWatch() {
     await this.stopHeadingWatch()
-    await (new Promise(resolve => setTimeout(resolve, 5000*(this.id-1))))
     console.log(this.id, "starting")
     this.headingWatch = await Location.WatchHeading((heading) => {
       // console.log(this.id, heading)
