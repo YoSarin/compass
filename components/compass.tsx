@@ -1,47 +1,49 @@
 import { Pointer, PointerProps } from "./pointer"
 import { Location } from '../lib/location';
+import * as ExpoLocation from 'expo-location';
 
 export enum HeadingType {
-  Magnetic,
-  True
+  MagneticHeading,
+  TrueHeading
 }
 
 export interface CompassProps extends PointerProps {
   headingType?:HeadingType
+  targetPoint?:ExpoLocation.GeocodedLocation
+  startingPoint?:ExpoLocation.GeocodedLocation
 }
 
-export class Compass extends Pointer<CompassProps> {
-
-  private static lastId:number = 0
-
-  private id:number = (++Compass.lastId)
+export class Compass<T extends CompassProps> extends Pointer<CompassProps> {
+  static readonly NORTH_POLE:ExpoLocation.GeocodedLocation = { latitude: 90.0, longitude: 0.0 }
+  static readonly SOUTH_POLE:ExpoLocation.GeocodedLocation = { latitude: -90.0, longitude: 0.0 }
 
   private headingWatch:{remove():void} = {remove : () => {}};
-  private headingType:HeadingType = HeadingType.True
+  private headingType:HeadingType = HeadingType.TrueHeading
+  private targetPoint?:ExpoLocation.GeocodedLocation
+  private startingPoint?:ExpoLocation.GeocodedLocation
 
-  constructor(props:CompassProps) {
+  constructor(props:T) {
     super(props)
-    this.headingType = props.headingType ? props.headingType : HeadingType.True
+    this.headingType = props.headingType ? props.headingType : HeadingType.TrueHeading
+    this.targetPoint = props.targetPoint
+    this.startingPoint = props.startingPoint
     this.startHeadingWatch()
   }
 
   private async startHeadingWatch() {
     await this.stopHeadingWatch()
-    console.log(this.id, "starting")
     this.headingWatch = await Location.WatchHeading((heading) => {
-      // console.log(this.id, heading)
-      if (this.headingType == HeadingType.True) {
-        this.pointTo(heading.trueHeading)
-      } else {
-        this.pointTo(heading.magHeading)
+      var headingAngle = (this.headingType == HeadingType.TrueHeading ? heading.trueHeading : heading.magHeading)
+      if (this.startingPoint !== undefined && this.targetPoint !== undefined) {
+        headingAngle = this.calculateDirection(this.startingPoint, this.targetPoint) - headingAngle
       }
+      this.pointToDirection(0 - headingAngle)
     })
   }
 
   private async stopHeadingWatch() {
     if (this.headingWatch != null && typeof(this.headingWatch) === 'object') {
       this.headingWatch.remove()
-      console.log(this.id, "stopped")
     }
   }
 }

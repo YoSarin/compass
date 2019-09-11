@@ -2,7 +2,10 @@ import CompassWindow from "./screens/compassWindow"
 import { Main } from "./screens/main"
 import { createStackNavigator } from "react-navigation-stack"
 import { createAppContainer } from "react-navigation"
+import { ScreenOrientation } from 'expo'
 
+
+ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
 
 const AppNavigator = createStackNavigator({
   Main: { screen: Main },

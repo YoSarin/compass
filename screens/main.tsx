@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View, Button } from 'react-native'
+import { FlatList, Text, View, Button } from 'react-native'
 import { NavigationScreenProp } from "react-navigation"
 import { Location } from '../lib/location';
 import { Compass, HeadingType } from '../components';
@@ -53,7 +53,7 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
             <Compass scale={10} style={{ arrowColor: "green" }} />
           </View>
           <View style={{flex:1}}>
-            <Compass scale={10} style={{ arrowColor: "blue" }} headingType={HeadingType.Magnetic} />
+            <Compass scale={10} style={{ arrowColor: "blue" }} headingType={HeadingType.MagneticHeading} />
           </View>
         </View>
         <View style={{flex: 4}}>
@@ -84,12 +84,3 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

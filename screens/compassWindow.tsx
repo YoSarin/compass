@@ -1,13 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Pointer } from '../components';
+import { View, StyleSheet } from 'react-native';
+import { Compass } from '../components';
 
 export default class CompassWindow extends React.Component {
 
   render() {
     return (
       <View style={styles.container}>
-        <Pointer scale={30} />
+        <Compass scale={25} />
       </View>
     )
   }
