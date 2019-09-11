@@ -1,5 +1,8 @@
 # Installation
+- install [nvm](https://github.com/nvm-sh/nvm#install--update-script):
+  - ```curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash```
 - install [node](https://github.com/nodesource/distributions/blob/master/README.md#debinstall); v10.16.3 works
+  - ```nvm install 10.16.3```
 - install ```expo-cli```: ```npm install -g expo-cli```
 - enter root of project and run ```npm install```
 - take a tea or wine and wait

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, View, Button } from 'react-native'
 import { NavigationScreenProp } from "react-navigation"
-import * as Location from 'expo-location';
+import { Location } from '../lib/location';
 import { Compass, HeadingType } from '../components';
 
 export class Main extends React.Component<{navigation:NavigationScreenProp<any>}> {
@@ -12,7 +12,6 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
   private storedLocations:Array<string> = [];
 
   async componentDidMount() {
-      await Location.requestPermissionsAsync()
       this.watchLocation()
   }
 
@@ -22,16 +21,13 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
 
   private async watchLocation() {
     await this.stopWatch()
-    this.positionWatch = await Location.watchPositionAsync({
-      accuracy: Location.Accuracy.Highest,
-      timeInterval: 1000,
-      distanceInterval: 0,
-    }, (position) => {
-      // console.log(position)
-      this.location = "" + position.coords.latitude + ";" + position.coords.longitude + " [±" + position.coords.accuracy + "]",
-      this.gpsCounter++
-      this.setState({refresh: true})
-    })
+    this.positionWatch = await Location.WatchLocation(
+      (position) => {
+        this.location = "" + position.coords.latitude + ";" + position.coords.longitude + " [±" + position.coords.accuracy + "]",
+        this.gpsCounter++
+        this.setState({refresh: true})
+      }
+    )
   }
 
   private async stopWatch() {

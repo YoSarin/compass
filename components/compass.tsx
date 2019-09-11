@@ -1,5 +1,5 @@
 import { Pointer, PointerProps } from "./pointer"
-import * as Location from 'expo-location';
+import { Location } from '../lib/location';
 
 export enum HeadingType {
   Magnetic,
@@ -26,12 +26,11 @@ export class Compass extends Pointer<CompassProps> {
   }
 
   private async startHeadingWatch() {
-    await Location.requestPermissionsAsync()
     await this.stopHeadingWatch()
     await (new Promise(resolve => setTimeout(resolve, 5000*(this.id-1))))
     console.log(this.id, "starting")
-    this.headingWatch = await Location.watchHeadingAsync((heading) => {
-      console.log(this.id, heading)
+    this.headingWatch = await Location.WatchHeading((heading) => {
+      // console.log(this.id, heading)
       if (this.headingType == HeadingType.True) {
         this.pointTo(heading.trueHeading)
       } else {
