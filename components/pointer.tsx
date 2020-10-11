@@ -5,7 +5,7 @@ import * as ExpoLocation from 'expo-location';
 
 export interface PointerProps {
   scale?:number
-  direction?:number|{from:ExpoLocation.GeocodedLocation, to:ExpoLocation.GeocodedLocation}
+  direction?:number|{from:ExpoLocation.LocationGeocodedLocation, to:ExpoLocation.LocationGeocodedLocation}
   style?:PointerStyle
 }
 
@@ -75,7 +75,7 @@ export class Pointer<T extends PointerProps> extends React.Component<T> {
     return "rotate(" + this.direction + ", " + center + ", " + center + ")"
   }
 
-  protected calculateDirection(from:ExpoLocation.GeocodedLocation, to:ExpoLocation.GeocodedLocation):number {
+  protected calculateDirection(from:ExpoLocation.LocationGeocodedLocation, to:ExpoLocation.LocationGeocodedLocation):number {
       var λ1 = from.longitude.toRad();
       var φ1 = from.latitude.toRad();
       var λ2 = to.longitude.toRad();

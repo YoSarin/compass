@@ -3,7 +3,6 @@
     "name": "Bojovka",
     "version": "0.0.1",
     "icon": "",
-    "sdkVersion": "34.0.0",
     "slug": "bojovka",
     "android": {
       "package": "net.yosarin.bojovka"

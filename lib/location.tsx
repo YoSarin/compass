@@ -1,7 +1,7 @@
 import * as ReactLocation from 'expo-location';
 
-export type PositionWatcher = (location:ReactLocation.LocationData) => void
-export type HeadingWatcher = (heading:ReactLocation.HeadingData) => void
+export type PositionWatcher = (location:ReactLocation.LocationObject) => void
+export type HeadingWatcher = (heading:ReactLocation.LocationHeadingObject) => void
 
 export class Location {
   private static LocationWatchReference:Promise<{remove() : void}>
@@ -48,13 +48,13 @@ export class Location {
     }}
   }
 
-  private static watchReactLocation(location:ReactLocation.LocationData):void {
+  private static watchReactLocation(location:ReactLocation.LocationObject):void {
     Location.LocationWatchers.forEach(
       (watcher) => { watcher(location) }
     )
   }
 
-  private static watchReactHeading(heading:ReactLocation.HeadingData):void {
+  private static watchReactHeading(heading:ReactLocation.LocationHeadingObject):void {
     Location.HeadingWatchers.forEach(
       (watcher) => { watcher(heading) }
     )

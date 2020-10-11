@@ -9,18 +9,18 @@ export enum HeadingType {
 
 export interface CompassProps extends PointerProps {
   headingType?:HeadingType
-  targetPoint?:ExpoLocation.GeocodedLocation
-  startingPoint?:ExpoLocation.GeocodedLocation
+  targetPoint?:ExpoLocation.LocationGeocodedLocation
+  startingPoint?:ExpoLocation.LocationGeocodedLocation
 }
 
 export class Compass<T extends CompassProps> extends Pointer<CompassProps> {
-  static readonly NORTH_POLE:ExpoLocation.GeocodedLocation = { latitude: 90.0, longitude: 0.0 }
-  static readonly SOUTH_POLE:ExpoLocation.GeocodedLocation = { latitude: -90.0, longitude: 0.0 }
+  static readonly NORTH_POLE:ExpoLocation.LocationGeocodedLocation = { latitude: 90.0, longitude: 0.0 }
+  static readonly SOUTH_POLE:ExpoLocation.LocationGeocodedLocation = { latitude: -90.0, longitude: 0.0 }
 
   private headingWatch:{remove():void} = {remove : () => {}};
   private headingType:HeadingType = HeadingType.TrueHeading
-  private targetPoint?:ExpoLocation.GeocodedLocation
-  private startingPoint?:ExpoLocation.GeocodedLocation
+  private targetPoint?:ExpoLocation.LocationGeocodedLocation
+  private startingPoint?:ExpoLocation.LocationGeocodedLocation
 
   constructor(props:T) {
     super(props)
