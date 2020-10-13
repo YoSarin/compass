@@ -1,25 +1,16 @@
 import React from 'react';
 import { Main } from './main';
 import renderer from 'react-test-renderer';
+import { watchPositionAsync } from 'expo-location';
 
-var navigation:any
+var navigation: any
 
 beforeEach(() => {
   navigation = jest.fn()
-  console = {
-    warn: jest.fn(),
-    log: jest.fn(),
-    error: jest.fn(),
-    info: jest.fn(),
-    trace: jest.fn(),
-    debug: jest.fn(),
-    table: jest.fn(),
-    disableYellowBox: false,
-    ignoredYellowBox: []
-  }
+  jest.useFakeTimers();
 })
 
-it('renders without crashing', () => {
+it('renders without crashing', async () => {
   const rendered = renderer.create(<Main navigation={new navigation()} />).toJSON();
   expect(rendered).toBeTruthy()
 });

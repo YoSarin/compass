@@ -3,7 +3,6 @@ import { View, StyleSheet } from 'react-native';
 import { Compass } from '../components';
 
 export default class CompassWindow extends React.Component {
-
   render() {
     return (
       <View style={styles.container}>

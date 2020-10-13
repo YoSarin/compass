@@ -8,17 +8,7 @@ var navigation:any
 describe("Compass", () => {
   beforeEach(() => {
     navigation = jest.fn()
-    console = {
-      warn: jest.fn(),
-      log: jest.fn(),
-      error: jest.fn(),
-      info: jest.fn(),
-      trace: jest.fn(),
-      debug: jest.fn(),
-      table: jest.fn(),
-      disableYellowBox: false,
-      ignoredYellowBox: []
-    }
+    jest.useFakeTimers();
   })
 
   it('renders without crashing', async () => {

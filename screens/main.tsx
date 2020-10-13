@@ -2,28 +2,35 @@ import React from 'react';
 import { FlatList, Text, View, Button } from 'react-native'
 import { NavigationScreenProp } from "react-navigation"
 import { Location } from '../lib/location';
+import { Coords } from '../lib/coords';
 import { Compass, HeadingType } from '../components';
 
 export class Main extends React.Component<{navigation:NavigationScreenProp<any>}> {
 
   private positionWatch:{remove():void} = {remove : () => {}};
-  private location:string = "unknown";
+  private location: string = "unknown";
+  private distanceToBrno: string = "unknown";
   private gpsCounter:number = 0;
-  private storedLocations:Array<string> = [];
+  private storedLocations: Array<string> = [];
+  
+  private brnoLocation: Coords = new Coords();
 
   async componentDidMount() {
       this.watchLocation()
   }
 
-  componentWillUnmount() {
-    this.stopWatch()
+  async componentWillUnmount() {
+    await this.stopWatch()
   }
 
   private async watchLocation() {
     await this.stopWatch()
     this.positionWatch = await Location.WatchLocation(
       (position) => {
-        this.location = "" + position.coords.latitude + ";" + position.coords.longitude + " [±" + position.coords.accuracy + "]",
+        if (position) {
+          this.location = "" + position.coords.latitude + ";" + position.coords.longitude + " [±" + position.coords.accuracy + "]",
+          this.distanceToBrno = "" + (new Coords(position.coords.latitude, position.coords.longitude)).DistanceTo(this.brnoLocation)
+        }
         this.gpsCounter++
         this.setState({refresh: true})
       }
@@ -41,7 +48,8 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
       <View style={{ flex: 1, flexDirection: "column", padding: 5 }}>
         <View style={{flex:1}}>
           <Text>Typescript! Version 2!</Text>
-          <Text>{this.location}</Text>
+          <Text>Location: {this.location}</Text>
+          <Text>Distance to Hell: {this.distanceToBrno}</Text>
           <Text>refreshed: {this.gpsCounter}</Text>
           <Text>Stored: {this.storedLocations.length}</Text>
         </View>
