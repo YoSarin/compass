@@ -27,6 +27,7 @@ export class Compass<T extends CompassProps> extends Pointer<CompassProps> {
     this.headingType = props.headingType ? props.headingType : HeadingType.TrueHeading
     this.targetPoint = props.targetPoint
     this.startingPoint = props.startingPoint
+    this.startHeadingWatch()
   }
   async componentDidMount() {
     await this.startHeadingWatch()

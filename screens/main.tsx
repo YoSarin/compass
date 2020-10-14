@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, Text, View, Button } from 'react-native'
 import { NavigationScreenProp } from "react-navigation"
 import { Location } from '../lib/location';
-import { Coords } from '../lib/coords';
+import { ICoords, DistanceBetween } from '../lib/coords';
 import { Compass, HeadingType } from '../components';
 
 export class Main extends React.Component<{navigation:NavigationScreenProp<any>}> {
@@ -13,7 +13,7 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
   private gpsCounter:number = 0;
   private storedLocations: Array<string> = [];
   
-  private brnoLocation: Coords = new Coords();
+  private brnoLocation: ICoords = {latitude: 49.195060, longitude: 16.606837};
 
   async componentDidMount() {
       this.watchLocation()
@@ -29,7 +29,7 @@ export class Main extends React.Component<{navigation:NavigationScreenProp<any>}
       (position) => {
         if (position) {
           this.location = "" + position.coords.latitude + ";" + position.coords.longitude + " [±" + position.coords.accuracy + "]",
-          this.distanceToBrno = "" + (new Coords(position.coords.latitude, position.coords.longitude)).DistanceTo(this.brnoLocation)
+          this.distanceToBrno = "" + DistanceBetween(position.coords, this.brnoLocation)
         }
         this.gpsCounter++
         this.setState({refresh: true})
