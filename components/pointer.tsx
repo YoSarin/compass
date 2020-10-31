@@ -2,10 +2,11 @@ import React from "react"
 import { View, StyleSheet, Text } from 'react-native';
 import Svg, { Circle, Path, G } from 'react-native-svg';
 import * as ExpoLocation from 'expo-location';
+import { ICoords } from "../lib/icoords";
 
 export interface PointerProps {
   scale?:number
-  direction?:number|{from:ExpoLocation.LocationGeocodedLocation, to:ExpoLocation.LocationGeocodedLocation}
+  direction?:number|{from:ICoords, to:ICoords}
   style?:PointerStyle
 }
 
@@ -75,7 +76,7 @@ export class Pointer<T extends PointerProps> extends React.Component<T> {
     return "rotate(" + this.direction + ", " + center + ", " + center + ")"
   }
 
-  protected calculateDirection(from:ExpoLocation.LocationGeocodedLocation, to:ExpoLocation.LocationGeocodedLocation):number {
+  protected calculateDirection(from:ICoords, to:ICoords):number {
       var λ1 = from.longitude.toRad();
       var φ1 = from.latitude.toRad();
       var λ2 = to.longitude.toRad();

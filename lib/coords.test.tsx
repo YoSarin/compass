@@ -1,4 +1,4 @@
-import { ICoords, DistanceBetween } from './coords';
+import { ICoords, DistanceBetween } from './icoords';
 
 var navigation:any
 

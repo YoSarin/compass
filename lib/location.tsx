@@ -1,7 +1,15 @@
 import * as ReactLocation from 'expo-location';
+import { ICoords } from './icoords';
+import { Disposable } from './iDisposable';
 
-export type PositionWatcher = (location:ReactLocation.LocationObject) => void
-export type HeadingWatcher = (heading:ReactLocation.LocationHeadingObject) => void
+export interface ILocationObject { coords:ICoords }
+export interface IHeadingObject { trueHeading:number, magHeading:number }
+
+export type PositionWatcher = (location:ILocationObject) => void
+export type HeadingWatcher = (heading: IHeadingObject) => void
+
+export type PositionWatch = (watcher: PositionWatcher) => Promise<Disposable>
+export type HeadingWatch = (watcher: HeadingWatcher) => Promise<Disposable>
 
 export class Location {
   private static LocationWatchReference:Promise<{remove() : void}>

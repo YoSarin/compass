@@ -1,6 +1,7 @@
 import { Pointer, PointerProps } from "./pointer"
 import { Location } from '../lib/location';
 import * as ExpoLocation from 'expo-location';
+import { ICoords } from "../lib/icoords";
 
 export enum HeadingType {
   MagneticHeading,
@@ -9,8 +10,8 @@ export enum HeadingType {
 
 export interface CompassProps extends PointerProps {
   headingType?:HeadingType
-  targetPoint?:ExpoLocation.LocationGeocodedLocation
-  startingPoint?:ExpoLocation.LocationGeocodedLocation
+  targetPoint?:ICoords
+  startingPoint?:ICoords
 }
 
 export class Compass<T extends CompassProps> extends Pointer<CompassProps> {
@@ -19,8 +20,8 @@ export class Compass<T extends CompassProps> extends Pointer<CompassProps> {
 
   private headingWatch:{remove():void} = {remove : () => {}};
   private headingType:HeadingType = HeadingType.TrueHeading
-  private targetPoint?:ExpoLocation.LocationGeocodedLocation
-  private startingPoint?:ExpoLocation.LocationGeocodedLocation
+  private targetPoint?:ICoords
+  private startingPoint?:ICoords
 
   constructor(props:T) {
     super(props)

@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, Text, View, Button } from 'react-native'
 import { NavigationScreenProp } from "react-navigation"
 import { Location } from '../lib/location';
-import { ICoords, DistanceBetween } from '../lib/coords';
+import { ICoords, DistanceBetween } from '../lib/icoords';
 import { Compass, HeadingType } from '../components';
 
 export class Main extends React.Component<{navigation:NavigationScreenProp<any>}> {
