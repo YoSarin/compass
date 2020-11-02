@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Bojovka",
+    "version": "0.0.1",
+    "icon": "",
+    "slug": "bojovka",
+    "android": {
+      "package": "net.yosarin.bojovka"
+    }
+  }
+}

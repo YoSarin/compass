@@ -1,8 +1,57 @@
 {
   "name": "compass",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "private": true,
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "@types/jest": "^24.9.1",
+    "@types/react": "^16.9.52",
+    "@types/react-native": "~0.63.2",
+    "@types/react-native-navigation": "^2.0.0",
+    "@types/react-navigation": "^3.4.0",
+    "@types/react-test-renderer": "^16.9.3",
+    "babel-preset-expo": "^8.3.0",
+    "jest": "^24.9.0",
+    "jest-expo": "^39.0.0",
+    "ts-jest": "^24.3.0",
+    "typescript": "~3.9.2"
+  },
+  "main": "./node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "eject": "expo eject",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(js|ts|tsx)$": "<rootDir>/node_modules/babel-jest"
+    },
+    "testURL": "http://localhost/"
+  },
   "dependencies": {
-    "cordova-android": "^6.2.3"
+    "expo": "^39.0.3",
+    "expo-location": "~9.0.0",
+    "expo-permissions": "~9.3.0",
+    "expo-screen-orientation": "^2.0.0",
+    "react": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
+    "react-native-gesture-handler": "~1.7.0",
+    "react-native-screens": "^2.11.0",
+    "react-native-svg": "12.1.0",
+    "react-native-typescript-transformer": "^1.2.13",
+    "react-navigation": "^4.4.2",
+    "react-navigation-stack": "^1.10.3",
+    "react-test-renderer": "^16.13.1"
   }
 }

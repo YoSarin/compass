@@ -1,9 +1,27 @@
-﻿# .gitignore
-[Pp]lugins/android.json
-[Pp]lugins/windows.json
-[Pp]lugins/wp8.json
-[Pp]lugins/remote_ios.json
-/[Pp]latforms/
-/AppPackages/CordovaApp.Windows10_1.0.0.1_debug_Test
-/bin
-/bld/Windows-AnyCPU/Debug
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# expo
+.expo/
+
+# dependencies
+/node_modules
+
+# Gradle
+.gradle/
+
+# Build
+.build/
+
+# jest
+.jest/
+
+# misc
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+debug.log*
