@@ -27,7 +27,8 @@ export class Pointer<T extends PointerProps> extends React.Component<T> {
 
   private scale:number
   private direction:number
-  private style:PointerStyle
+  private style: PointerStyle
+  private _mounted: boolean = false;
 
   private static shape = [
       [1 / 2, 2 / 3],
@@ -47,12 +48,24 @@ export class Pointer<T extends PointerProps> extends React.Component<T> {
 
   public rescaleBy(multiplier:number) {
     this.scale *= multiplier
-    this.setState({render:true})
+    if (this._mounted) {
+      this.setState({ render: true })
+    }
   }
 
   public pointToDirection(direction:number) {
     this.direction = (direction % 360)
-    this.setState({render:true})
+    if (this._mounted) {
+      this.setState({ render: true })
+    }
+  }
+  
+  async componentDidMount() {
+    this._mounted = true;
+  }
+
+  async componentWillUnmount() {
+    this._mounted = false;
   }
 
   public needlePath():string {

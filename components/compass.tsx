@@ -2,6 +2,7 @@ import { Pointer, PointerProps } from "./pointer"
 import { Location } from '../lib/location';
 import * as ExpoLocation from 'expo-location';
 import { ICoords } from "../lib/icoords";
+import { IDisposable } from "../lib/iDisposable";
 
 export enum HeadingType {
   MagneticHeading,
@@ -11,39 +12,53 @@ export enum HeadingType {
 export interface CompassProps extends PointerProps {
   headingType?:HeadingType
   targetPoint?:ICoords
-  startingPoint?:ICoords
 }
 
 export class Compass<T extends CompassProps> extends Pointer<CompassProps> {
   static readonly NORTH_POLE:ExpoLocation.LocationGeocodedLocation = { latitude: 90.0, longitude: 0.0 }
   static readonly SOUTH_POLE:ExpoLocation.LocationGeocodedLocation = { latitude: -90.0, longitude: 0.0 }
 
-  private headingWatch:{remove():void} = {remove : () => {}};
-  private headingType:HeadingType = HeadingType.TrueHeading
-  private targetPoint?:ICoords
-  private startingPoint?:ICoords
+  private headingWatch: IDisposable = { Dispose: () => { } };
+  private locationWatch: IDisposable = { Dispose: () => { } };
+
+  private currentLocation?: ICoords;
 
   constructor(props:T) {
     super(props)
-    this.headingType = props.headingType ? props.headingType : HeadingType.TrueHeading
-    this.targetPoint = props.targetPoint
-    this.startingPoint = props.startingPoint
-    this.startHeadingWatch()
   }
   async componentDidMount() {
-    await this.startHeadingWatch()
+    super.componentDidMount();
+    if (this.props.targetPoint !== undefined) {
+      this.startLocationWatch();
+    }
+    await this.startHeadingWatch();
   }
 
   async componentWillUnmount() {
-    await this.stopHeadingWatch()
+    super.componentWillUnmount();
+    await this.stopHeadingWatch();
+    await this.stopLocationWatch();
+  }
+
+  private async startLocationWatch() {
+    await this.stopLocationWatch();
+    this.locationWatch = await Location.WatchLocation(location => {
+      this.currentLocation = location.coords;
+    }, "Compass");
+  }
+
+  private async stopLocationWatch() {
+    if (this.locationWatch != null && typeof(this.locationWatch) === 'object') {
+      this.locationWatch.Dispose()
+    }
   }
 
   private async startHeadingWatch() {
     await this.stopHeadingWatch()
     this.headingWatch = await Location.WatchHeading((heading) => {
-      var headingAngle = (this.headingType == HeadingType.TrueHeading ? heading.trueHeading : heading.magHeading)
-      if (this.startingPoint !== undefined && this.targetPoint !== undefined) {
-        headingAngle = this.calculateDirection(this.startingPoint, this.targetPoint) - headingAngle
+      var headingAngle = (this.props.headingType == HeadingType.TrueHeading ? heading.trueHeading : heading.magHeading)
+      if (this.props.targetPoint !== undefined && this.currentLocation !== undefined) {
+        headingAngle = this.calculateDirection(this.currentLocation, this.props.targetPoint) - headingAngle
       }
       this.pointToDirection(0 - headingAngle)
     })
@@ -51,7 +66,7 @@ export class Compass<T extends CompassProps> extends Pointer<CompassProps> {
 
   private async stopHeadingWatch() {
     if (this.headingWatch != null && typeof(this.headingWatch) === 'object') {
-      this.headingWatch.remove()
+      this.headingWatch.Dispose()
     }
   }
 }
